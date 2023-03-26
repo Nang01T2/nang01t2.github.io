@@ -1,3 +1,6 @@
+const path = require("path");
+const ghPages = process.env.DEPLOY_TARGET === "gh-pages";
+
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
   options: {
