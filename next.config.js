@@ -17,6 +17,8 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
+  basePath: ghPages ? "/nang01t2.github.io/" : "",
+  assetPrefix: ghPages ? "/nang01t2.github.io/" : "",
 };
 
 // Merge MDX config with Next.js config
