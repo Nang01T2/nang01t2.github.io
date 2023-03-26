@@ -13,16 +13,13 @@ jobs:
         with:
           persist-credentials: false
 
-      # a standard step for GitHub actions on Node
-      # https://github.com/actions/setup-node
-      - uses: actions/setup-node@v3
+      - name: Install and Build
+        uses: actions/setup-node@v3
         with:
           # update the Node version to meet your needs
           node-version: 16
           cache: npm
 
-      - name: Install and Build
-        uses: actions/setup-node@v3
       - run: npm install
       - run: npm run build
       - run: npm run export
@@ -33,7 +30,6 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: out # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
