@@ -1,4 +1,3 @@
-const path = require("path");
 const ghPages = process.env.DEPLOY_TARGET === "gh-pages";
 
 const withMDX = require("@next/mdx")({
@@ -20,7 +19,7 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
-  basePath: ghPages ? "/nang01t2.github.io/" : "",
+  basePath: ghPages ? "/nang01t2.github.io" : "",
   assetPrefix: ghPages ? "/nang01t2.github.io/" : "",
 };
 
