@@ -7,7 +7,7 @@ import React from "react";
 export default function Layout({ children }) {
   return (
     <>
-      <Header />
+      <Header service_title="PressBlog" />
       <main>
         <div className="p-4 flex justify-center">{children}</div>
       </main>

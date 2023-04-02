@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import Footer from "./Footer";
-import Header from "./_Header";
+import Header from "./Header";
 
 const c1 = "#071013",
   c2 = "#fffecb",

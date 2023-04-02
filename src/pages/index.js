@@ -21,21 +21,7 @@ const description =
 
 export default function Home({ postsMetaData }) {
   return (
-    <div>
-      <div className="header-info">
-        <div className="greetings">
-          <p className="greetings-heading">
-            Greetings, Programs! in the Matrix called Earth.
-          </p>
-          <p className="greetings-statement">
-            Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod
-            tempor incidunt ut l
-          </p>
-        </div>
-      </div>
-      <div className="posts-display-container">
-        <p className="quote">All Posts</p>
-      </div>
+    <>
       <CardLayout postsMetaData={postsMetaData} />
 
       <style jsx>{`
@@ -102,15 +88,17 @@ export default function Home({ postsMetaData }) {
           }
         }
       `}</style>
-    </div>
+    </>
   );
 }
 
 export async function getStaticProps() {
-  const postsMetaData = getAllPostsMetadata();
+  const postsMetaData = getAllPostsMetadata(1);
+  //console.log("postsMetaData", postsMetaData);
   return {
     props: {
       postsMetaData,
+      layout: "main",
     },
   };
 }

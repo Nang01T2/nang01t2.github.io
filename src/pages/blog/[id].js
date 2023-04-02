@@ -138,7 +138,7 @@ const components = {
     />
   ),
   a: (props) => <HoverableLink link_props={props} />,
-  code: (props) => <CodeSyntaxHighlighter code_props={props} />,
+  //code: (props) => <CodeSyntaxHighlighter code_props={props} />,
   em: (props) => (
     <em
       style={{
@@ -202,8 +202,8 @@ const components = {
 export default function Blog({ postMetadata, postContent }) {
   //console.log("postContent", postContent);
   return (
-    <div>
-      <article className="blog-content">
+    <>
+      <article>
         <MDXRemote {...postContent} components={components} />
       </article>
 
@@ -219,7 +219,7 @@ export default function Blog({ postMetadata, postContent }) {
           max-width: 50vw;
         }
       `}</style>
-    </div>
+    </>
   );
 }
 

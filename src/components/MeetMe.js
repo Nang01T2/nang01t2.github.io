@@ -6,28 +6,16 @@ const MeetMe = () => {
     <div>
       <Image
         src="/images/no-image.png"
-        alt="john doe avatar"
+        alt="avatar"
         width={150}
         height={150}
+        className={styles.img}
       />
-      <p>
-        Hey, I am <strong>John Doe</strong>. I love coding. Lorem ipsum dolor
+      <p className={styles.p}>
+        Hey, I am <strong>Bla bla</strong>. I love coding. Lorem ipsum dolor
         sit, amet consectetur adipisicing elit. Reiciendis commodi numquam
         incidunt blanditiis quibusdam atque natus inventore sunt autem iusto.
       </p>
-      <style jsx>{`
-        img {
-          display: flex;
-          flex: 1;
-          width: calc(1.2rem + 1vw);
-          max-width: calc(1.2rem + 1vw);
-          height: auto;
-          margin: 0 5px 0 5px;
-        }
-        img:hover {
-          cursor: pointer;
-        }
-      `}</style>
     </div>
   );
 };
