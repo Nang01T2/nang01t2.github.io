@@ -49,7 +49,7 @@ function getHeadingAnchorProps(props) {
 }
 
 const components = {
-  img: (props) => <NextOptimizedImage img_props={props} />,
+  //img: (props) => <NextOptimizedImage img_props={props} />,
   h1: (props) => {
     const [modifiedProps, id] = getHeadingAnchorProps(props);
     return (

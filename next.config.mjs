@@ -39,8 +39,9 @@ const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   images: {
-    loader: "imgix",
-    path: "https://images.unsplash.com/",
+    unoptimized: true,
+    //loader: "imgix",
+    //path: "https://images.unsplash.com/",
   },
   basePath:
     process.env.DEPLOY_TARGET === "gh-pages" ? "/nang01t2.github.io" : "",
