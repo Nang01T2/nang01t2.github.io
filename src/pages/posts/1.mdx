@@ -1,0 +1,73 @@
+---
+title: Hello MDX
+---
+
+export const meta = {
+  title: "Hello MDX",
+};
+
+# Hello MDX
+
+## What is this
+
+This is a pre-configured Next.js boilerplate which contains TailwindCSS, @next/mdx and next-mdx-remote and useful mdx plugins.
+
+## Features for
+
+- Syntax highlight with `highlight.js` or `prism`
+- Display React components in Markdown
+- Automatically add `id` to headings (H1, H2,...) by `rehype-slug`
+- Automatically add link icon when mouse over headings by `rehype-autolink-headings`
+
+## Syntax highlight
+
+```ts
+const message: string = "Hello Markdown";
+const num: number = 1234567890;
+```
+
+## React component
+
+<div
+  style={{
+    display: "flex",
+    backgroundColor: "#333333",
+    padding: 8,
+    borderRadius: 5,
+  }}
+>
+  {["A", "React", "Component", "in", "Markdown"].map((x, id) => (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        padding: 4,
+        marginRight: 8,
+        backgroundColor: "#ffffff",
+        color: "#333333",
+        width: 110,
+        fontWeight: 700,
+        borderRadius: 3,
+      }}
+      key={x}
+    >
+      {x}
+    </div>
+  ))}
+</div>
+
+## Tables
+
+| No  | Fruites |
+| --- | ------- |
+| 1   | Apple   |
+| 2   | Orange  |
+| 3   | Grape   |
+
+## Other
+
+Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+:smile

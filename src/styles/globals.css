@@ -1,22 +1,68 @@
-:root {
-	--c1: #071013;
-	--c2: #fffecb;
-	--c3: #20a4f3;  
-	--c4: #1d2b35;
-	--c5: #fb232e;
-	--c6: #ffaa33;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 * {
-	box-sizing: border-box;
-	margin: 0;
 }
 
-body {
-	-webkit-font-smoothing: antialiased;
+/**
+ * CSS for rehype-prismplus to display line number and highlight
+ * Please remove comment if you want to display them
+pre {
+  overflow-x: auto;
 }
 
-::selection {
-  background: var(--c1);
-  color: var(--c6);
+.code-highlight {
+  float: left;
+  min-width: calc(100%-4px);
 }
+
+.code-line {
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: -16px;
+  margin-right: -16px;
+  border-left-width: 4px;
+  border-left-color: rgba(31, 41, 55, 0);
+}
+
+.code-line.inserted {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+.code-line.deleted {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+.highlight-line {
+  margin-left: -16px;
+  margin-right: -16px;
+  background-color: rgba(55, 65, 81, 0.5);
+  border-left-width: 4px;
+  border-left-color: rgb(59, 130, 246);
+}
+
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: rgb(156, 163, 175);
+  content: attr(line);
+}
+ */
