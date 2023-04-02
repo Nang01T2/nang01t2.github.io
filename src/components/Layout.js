@@ -2,7 +2,9 @@ import Header from "@/components/Header";
 import "prism-themes/themes/prism-atom-dark.css"; //for rehype-prism
 //import "highlight.js/styles/github-dark.css"; //for rehype-highlight
 
-const Layout = ({ children }) => {
+import React from "react";
+
+export default function Layout({ children }) {
   return (
     <>
       <Header />
@@ -11,6 +13,4 @@ const Layout = ({ children }) => {
       </main>
     </>
   );
-};
-
-export default Layout;
+}

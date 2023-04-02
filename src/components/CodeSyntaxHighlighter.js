@@ -37,10 +37,10 @@ const file_name_container_background = c4 + "d9",
 export default class CodeSyntaxHighlighter extends Component {
   constructor(props) {
     super(props);
-    this.language = this.props.code_props?.className?
+    this.language = this.props.code_props?.className
       .replace("language-", "")
       .split(":")[0];
-    this.file_name = this.props.code_props?.className?
+    this.file_name = this.props.code_props?.className
       .replace("language-", "")
       .split(":")[1];
     

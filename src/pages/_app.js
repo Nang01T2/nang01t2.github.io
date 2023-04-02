@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 import { MDXProvider } from "@mdx-js/react";
 import MDXComponents from "@/components/MDXComponents";
 import MDXLayout from "@/components/MDXLayout";
+import Layout from "@/components/Layout";
+
 
 export default function App({ Component, pageProps }) {
   switch (pageProps.layout) {
