@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { getAllPostsMetadata } from "@/lib/get-posts-data";
 import CardLayout from "@/components/CardLayout";
 import PageLayout from "@/components/PageLayout";
@@ -20,9 +21,25 @@ const description =
   "I'm Santha Lakshmi Narayana, a voyager on mission exploring digital universe to understand how it works.";
 
 export default function Home({ postsMetaData }) {
+  const [filteredPosts, setFilteredPosts] = useState(postsMetaData);
+  const [currentPageIndex, setCurrentPageIndex] = useState(1);
+
+  const loadMorePosts = async () => {
+    const res = await fetch(`/api/posts?page=${currentPageIndex + 1}`); // absolute url is supported here
+    const posts = await res.json();
+
+    setFilteredPosts((_posts) => [..._posts, ...posts]);
+    setCurrentPageIndex((_pageIndex) => _pageIndex + 1);
+  };
+
   return (
     <>
-      <CardLayout postsMetaData={postsMetaData} />
+      <div>
+        <CardLayout postsMetaData={filteredPosts} />
+        <button onClick={loadMorePosts} className={styles.button}>
+          Load more
+        </button>
+      </div>
 
       <style jsx>{`
         .header-info {

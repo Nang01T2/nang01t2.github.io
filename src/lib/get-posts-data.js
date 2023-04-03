@@ -45,7 +45,7 @@ export function getAllPostsPath() {
 */
 }
 
-export function getAllPostsMetadata() {
+export function getAllPostsMetadata(pageIndex) {
   const allMdxFiles = getMdxFiles();
 
   const allPostsData = allMdxFiles.map((parsedFile) => {
@@ -60,13 +60,15 @@ export function getAllPostsMetadata() {
     return { metadata, content };
   });
 
-  return allPostsData.sort((a, b) => {
+  const sortedData = allPostsData.sort((a, b) => {
     if (new Date(a.metadata.date) < new Date(b.metadata.date)) {
       return 1;
     } else {
       return -1;
     }
   });
+
+  return filterPostsByPageIndex(sortedData, pageIndex);
 
   /*
 	const postsMetadata = metadata.map((metadata, index) => {
@@ -87,6 +89,19 @@ export function getAllPostsMetadata() {
 	})
 */
 }
+
+export const filterPostsByPageIndex = (posts, pageIndex) => {
+  const postPerPage = 5;
+  // get the total posts from page 1 to current page
+  const totalPagePosts = +pageIndex * postPerPage;
+
+  // get the total posts from page 1 to previous page
+  const prevPagePosts = totalPagePosts - postPerPage;
+
+  return posts.filter(
+    (post, index) => index < totalPagePosts && index >= prevPagePosts
+  );
+};
 
 export function getPostMetadata(id) {
   const postMetadata = metadata.filter((metadata, index) => {
