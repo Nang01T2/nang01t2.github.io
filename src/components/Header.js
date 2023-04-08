@@ -1,27 +1,35 @@
 import Link from "next/link";
 import styles from "@/styles/Header.module.css";
-
+import { Navbar } from "flowbite-react";
 import React from "react";
 
 export default function Header({ service_title }) {
   return (
-    <header className={styles.header}>
-      <div className="flex items-center h-16 px-4">
-        <h2>
-          <Link href="/" className="font-bold text-2xl flex-1">
-            {service_title}
+    <>
+      <Navbar
+        fluid={true}
+        rounded={true}
+        className="fixed z-50 w-full shadow bg-opacity-60 justify-between backdrop-filter backdrop-blur-lg"
+      >
+        <Link href="/">
+          <h2 className="font-extrabold text-xl">{service_title}</h2>
+        </Link>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Link href="/">
+            <Navbar.Link>Home</Navbar.Link>
           </Link>
-        </h2>
-
-        <ul>
-          <li>
-            <Link href="/about">About</Link>
-          </li>
-          <li>
-            <Link href="#">GitHub Code</Link>
-          </li>
-        </ul>
-      </div>
-    </header>
+          <Link href="/reading-history">
+            <Navbar.Link>Reading History</Navbar.Link>
+          </Link>
+          <Link href="/post-blog">
+            <Navbar.Link>Post Blog</Navbar.Link>
+          </Link>
+          <Link href="/delete-blog">
+            <Navbar.Link>Delete Blog</Navbar.Link>
+          </Link>
+        </Navbar.Collapse>
+      </Navbar>
+    </>
   );
 }

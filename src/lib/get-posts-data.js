@@ -68,7 +68,8 @@ export function getAllPostsMetadata(pageIndex) {
     }
   });
 
-  return filterPostsByPageIndex(sortedData, pageIndex);
+  return sortedData;
+  //return filterPostsByPageIndex(sortedData, pageIndex);
 
   /*
 	const postsMetadata = metadata.map((metadata, index) => {

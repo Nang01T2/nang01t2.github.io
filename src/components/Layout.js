@@ -1,16 +1,15 @@
 import Header from "@/components/Header";
-import "prism-themes/themes/prism-atom-dark.css"; //for rehype-prism
-//import "highlight.js/styles/github-dark.css"; //for rehype-highlight
-
 import React from "react";
 
 export default function Layout({ children }) {
   return (
     <>
-      <Header service_title="PressBlog" />
-      <main>
-        <div className="p-4 flex justify-center">{children}</div>
-      </main>
+      <div>
+        <Header service_title="PressBlog" />
+        <main className="pt-10">
+          <div className="p-4 flex justify-center">{children}</div>
+        </main>
+      </div>
     </>
   );
 }
