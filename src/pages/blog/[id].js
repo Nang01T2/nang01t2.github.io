@@ -223,7 +223,7 @@ export default function Blog({ postMetadata, postContent }) {
   return (
     <>
       <article>
-        <MDXRemote {...postContent} components={components} />
+        <MDXRemote {...postContent} components={{}} />
       </article>
     </>
   );

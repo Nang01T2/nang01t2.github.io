@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "@/styles/Header.module.css";
 import { Navbar } from "flowbite-react";
 import React from "react";
+import DarkModeSwitch from "./DarkModeSwitch";
 
 export default function Header({ service_title }) {
   return (
@@ -14,7 +15,9 @@ export default function Header({ service_title }) {
         <Link href="/">
           <h2 className="font-extrabold text-xl">{service_title}</h2>
         </Link>
+
         <Navbar.Toggle />
+
         <Navbar.Collapse>
           <Link href="/">
             <Navbar.Link>Home</Navbar.Link>
@@ -28,6 +31,9 @@ export default function Header({ service_title }) {
           <Link href="/delete-blog">
             <Navbar.Link>Delete Blog</Navbar.Link>
           </Link>
+          <Navbar.Link>
+            <DarkModeSwitch />
+          </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
     </>
