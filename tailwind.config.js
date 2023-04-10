@@ -5,28 +5,9 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/pages/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
-    extend: {
-      content: {},
-      typography: {
-        DEFAULT: {
-          css: {
-            /* for highlight.js
-            "pre code": {
-              padding: 0,
-            },
-            */
-            //Remove `` around inline code block
-            "code::before": {
-              content: "",
-            },
-            "code::after": {
-              content: "",
-            },
-          },
-        },
-      },
-    },
+    extend: {},
   },
   plugins: [require("@tailwindcss/typography"), require("flowbite/plugin")],
 };

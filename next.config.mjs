@@ -33,20 +33,18 @@ const withMDX = createMDX({
     remarkPlugins: [remarkFrontmatter, remarkGfm, remarkMath],
     rehypePlugins: [
       rehypeKatex,
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          properties: {
-            className: [
-              "anchor no-underline flex items-center before:-translate-x-[8px] before:-ml-[20px] before:bg-no-repeat before:bg-contain before:w-[20px] before:h-[20px] before:content-[''] hover:before:bg-[url('/link.svg')]",
-            ],
-          },
-          behaviour: "wrap",
-        },
-      ],
-      //[rehypePrism, { ignoreMissing: true }],
-      //rehypeHighlight,
+      // rehypeSlug,
+      // [
+      //   rehypeAutolinkHeadings,
+      //   {
+      //     properties: {
+      //       className: [
+      //         "anchor no-underline flex items-center before:-translate-x-[8px] before:-ml-[20px] before:bg-no-repeat before:bg-contain before:w-[20px] before:h-[20px] before:content-[''] hover:before:bg-[url('/link.svg')]",
+      //       ],
+      //     },
+      //     behaviour: "wrap",
+      //   },
+      // ],
       [rehypePrettyCode, rehypePrettyCodeOptions],
     ],
   },
