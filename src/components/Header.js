@@ -1,22 +1,23 @@
-import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import DarkModeSwitch from "./DarkModeSwitch";
+import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import DarkModeSwitch from './DarkModeSwitch';
 
 export default function Header() {
   const router = useRouter();
   const { route } = router;
   const [blogDropdownOpen, setblogDropdownOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const onHome = route === "/" ? true : false;
-  const onAbout = route === "/about" ? true : false;
-  const onContact = route === "contact" ? true : false;
-  const onBlog = route && route.includes("blog") ? true : false;
-  const onFAQ = route === "faq" ? true : false;
-  const onCookie = route === "cookie" ? true : false;
-  const onFreeTrial = route === "free-trial" ? true : false;
-  const onSignIn = route === "sign-in" ? true : false;
-  const onTerms = route === "terms" ? true : false;
+  const onHome = route === '/' ? true : false;
+  const onAbout = route === '/about' ? true : false;
+  const onContact = route === 'contact' ? true : false;
+  const onTags = route === '/tags' ? true : false;
+  const onBlog = route && route.includes('blog') ? true : false;
+  const onFAQ = route === 'faq' ? true : false;
+  const onCookie = route === 'cookie' ? true : false;
+  const onFreeTrial = route === 'free-trial' ? true : false;
+  const onSignIn = route === 'sign-in' ? true : false;
+  const onTerms = route === 'terms' ? true : false;
 
   return (
     <nav className="sticky inset-0 z-20 bg-white dark:bg-gray-900 py-4 shadow border-solid">
@@ -51,14 +52,14 @@ export default function Header() {
 
         <div
           className={`${
-            mobileNavOpen ? "" : "hidden "
+            mobileNavOpen ? '' : 'hidden '
           }menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:pl-3 lg:pr-0 px-8`}
         >
           <div className="text-md font-bold text-gray-700 dark:text-blue-300 lg:flex-grow">
             <Link href="/">
               <p
                 className={`${
-                  onHome ? "text-blue-700 " : ""
+                  onHome ? 'text-blue-700 ' : ''
                 }block mt-4 lg:inline-block lg:mt-0 px-3 py-2 rounded mr-1 hover:text-blue-700 cursor-pointer`}
               >
                 Home
@@ -67,7 +68,7 @@ export default function Header() {
             <Link href="/about">
               <p
                 className={`${
-                  onAbout ? "text-blue-700 " : ""
+                  onAbout ? 'text-blue-700 ' : ''
                 }block mt-4 lg:inline-block lg:mt-0 px-3 py-2 rounded mr-1 hover:text-blue-700 cursor-pointer`}
               >
                 About
@@ -76,10 +77,19 @@ export default function Header() {
             <Link href="/contact">
               <p
                 className={`${
-                  onContact ? "text-blue-700 " : ""
+                  onContact ? 'text-blue-700 ' : ''
                 }block mt-4 lg:inline-block lg:mt-0 px-3 py-2 rounded mr-1 hover:text-blue-700 cursor-pointer`}
               >
                 <span>Contact</span>
+              </p>
+            </Link>
+            <Link href="/tags">
+              <p
+                className={`${
+                  onTags ? 'text-blue-700 ' : ''
+                }block mt-4 lg:inline-block lg:mt-0 px-3 py-2 rounded mr-1 hover:text-blue-700 cursor-pointer`}
+              >
+                <span>Tags</span>
               </p>
             </Link>
             <div className="relative inline">
@@ -87,12 +97,12 @@ export default function Header() {
                 <p
                   onClick={() => setblogDropdownOpen((prev) => !prev)}
                   className={`${
-                    onBlog ? "text-blue-700 " : ""
+                    onBlog ? 'text-blue-700 ' : ''
                   }block mt-4 lg:inline-block lg:mt-0 px-3 py-2 rounded hover:text-blue-700 cursor-pointer`}
                 >
                   <span>Blog</span>
                   <span className="ml-2 font-size inline-block">
-                    {" "}
+                    {' '}
                     <svg
                       xmlns="https://www.w3.org/2000/svg"
                       className="h-3 w-3"
@@ -112,7 +122,7 @@ export default function Header() {
               </a>
               <div
                 className={`${
-                  blogDropdownOpen ? "" : "hidden "
+                  blogDropdownOpen ? '' : 'hidden '
                 }bg-white shadow-md rounded border border-gray-300 text-sm absolute top-auto left-0 min-w-full w-56 z-30 mt-1`}
               >
                 <span className="absolute top-0 left-0 w-3 h-3 bg-white border transform rotate-45 -mt-1 ml-6"></span>
