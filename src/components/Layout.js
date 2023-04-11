@@ -5,7 +5,7 @@ export default function Layout({ children }) {
   return (
     <>
       <div>
-        <Header service_title="Home" />
+        <Header />
         <main className="pt-10">
           <div className="p-4 flex justify-center">{children}</div>
         </main>

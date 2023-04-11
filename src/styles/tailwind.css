@@ -3,3 +3,224 @@
 @tailwind utilities;
 
 @import "./syntax-highlighting.css";
+
+.italic {
+  @apply text-left tracking-wide py-6 not-italic font-poetry text-xl md:text-2xl;
+}
+
+.caption {
+  text-align: center;
+  margin: 0;
+  margin-top: -2em;
+  font-size: 0.9em;
+  font-family: monospace;
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+  border-left-width: 0.5rem;
+  quotes: none;
+  margin-top: 4em;
+  font-family: "IBM Plex Mono";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em;
+  margin-bottom: 1em;
+  padding-left: 2em;
+  border-left-color: #7da8fd !important;
+}
+
+@media (min-width: 640px) {
+  .prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+    border-left-width: 0.5rem;
+    quotes: none;
+    margin-top: 4em;
+    font-family: "IBM Plex Mono";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.25em;
+    margin-bottom: 1em;
+    padding-left: 2em;
+    border-left-color: #7da8fd !important;
+  }
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+  @apply sm:text-xl;
+}
+
+.task-list-item::before {
+  @apply hidden;
+}
+
+.task-list-item {
+  @apply list-none;
+}
+
+.footnotes {
+  @apply pt-8 mt-12 border-t border-gray-200 dark:border-gray-700;
+}
+
+.csl-entry {
+  @apply my-5;
+}
+
+[type="checkbox"] {
+  margin-right: 1em;
+}
+
+.prose a {
+  @apply no-underline font-normal break-words;
+}
+
+.dark
+  .dark\:prose-dark
+  :where(ol li):not(:where([class~="not-prose"] *))::marker {
+  font-weight: 600 !important;
+  color: #79a8ff !important;
+}
+.prose :where(ol li):not(:where([class~="not-prose"] *))::marker {
+  font-weight: 600 !important;
+  color: #364a70 !important;
+}
+
+.dark
+  .dark\:prose-dark
+  :where(ul li):not(:where([class~="not-prose"] *))::marker {
+  font-weight: 600 !important;
+  color: #79a8ff !important;
+}
+.prose :where(ul li):not(:where([class~="not-prose"] *))::marker {
+  font-weight: 600 !important;
+  color: #364a70 !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.dark .dark\:prose-dark :where(code):not(:where([class~="not-prose"] *)) {
+  color: #c9b457;
+  font-weight: 400;
+  font-size: 1.05em;
+  background-color: #2a2e46 !important;
+  overflow-wrap: break-word;
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  color: #000000;
+  font-weight: 400;
+  font-size: 1.05em;
+  background-color: #b3b3b3af;
+  overflow-wrap: break-word;
+}
+
+.dark .dark\:prose-dark :where(pre):not(:where([class~="not-prose"] *)) {
+  color: #fffbf0;
+  background-color: #000000 !important;
+}
+
+.dark .dark\:prose-dark :where(pre code):not(:where([class~="not-prose"] *)) {
+  color: #fffbf0;
+  background-color: #000000 !important;
+}
+
+.prose :where(pre):not(:where([class~="not-prose"] *)) {
+  background-color: #1e293b;
+  color: #fffbf0;
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"] *)) {
+  background-color: #1e293b;
+  color: #fffbf0;
+}
+
+.dark .dark\:prose-dark h1 {
+  color: #ff86ebcb;
+}
+.dark .dark\:prose-dark h2 {
+  color: #ff86ebcb;
+}
+.dark .dark\:prose-dark h3 {
+  color: #ff86ebcb;
+}
+.dark .dark\:prose-dark h4 {
+  color: #ff86ebcb;
+}
+.dark .dark\:prose-dark h5 {
+  color: #ff86ebcb;
+}
+
+.prose :where(h1):not(:where([class~="not-prose"] *)) {
+  font-size: 2.6em;
+  font-weight: bold;
+  padding-top: 0.6em;
+  padding-bottom: 0.55em;
+  font-family: "IBM Plex Mono";
+  overflow-wrap: break-word;
+}
+
+.prose :where(h2):not(:where([class~="not-prose"] *)) {
+  font-size: 2em;
+  font-weight: bold;
+  padding-top: 0.55em;
+  padding-bottom: 0.4em;
+  font-family: "IBM Plex Mono";
+  overflow-wrap: break-word;
+}
+
+.prose :where(h3):not(:where([class~="not-prose"] *)) {
+  font-size: 1.8em;
+  font-weight: bold;
+  padding-top: 0.4em;
+  padding-bottom: 0.35em;
+  font-family: "IBM Plex Mono";
+  overflow-wrap: break-word;
+}
+
+.prose :where(h4):not(:where([class~="not-prose"] *)) {
+  font-size: 1.4em;
+  font-weight: bold;
+  padding-top: 0.35em;
+  padding-bottom: 0.15em;
+  font-family: "IBM Plex Mono";
+  overflow-wrap: break-word;
+}
+
+.prose :where(h5):not(:where([class~="not-prose"] *)) {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding-top: 0.15em;
+  padding-bottom: 0.1em;
+  font-family: "IBM Plex Mono";
+  overflow-wrap: break-word;
+}
+
+.katex-display > .katex {
+  white-space: normal !important;
+}
+
+.katex-display > .base {
+  margin: 0.25em 0 !important;
+}
+
+.katex-display {
+  margin: 0.5em 0 !important;
+}
+
+.katex-display {
+  overflow: auto hidden !important;
+}
+
+.ytvideo {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 2em;
+  margin-bottom: 6em;
+}
+
+.ytvideo iframe {
+  position: absolute;
+  width: 100% !important;
+  height: 100% !important;
+}

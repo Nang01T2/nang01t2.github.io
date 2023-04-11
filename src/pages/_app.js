@@ -39,13 +39,11 @@ export default function App({ Component, pageProps }) {
       console.log("Default Layout");
       return (
         <ThemeProvider enableSystem={true} attribute="class">
-          <div className="transition-colors duration-300 min-h-screen select-none">
-            <MDXLayout currentPage={pageProps.currentPage}>
-              <MDXProvider components={{}}>
-                <Component {...pageProps} />
-              </MDXProvider>
-            </MDXLayout>
-          </div>
+          <MDXLayout>
+            <MDXProvider components={{}}>
+              <Component {...pageProps} />
+            </MDXProvider>
+          </MDXLayout>
         </ThemeProvider>
       );
     }

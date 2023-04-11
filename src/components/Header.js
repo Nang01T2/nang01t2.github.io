@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import DarkModeSwitch from "./DarkModeSwitch";
 
-export default function Header({ service_title }) {
+export default function Header() {
   const router = useRouter();
   const { route } = router;
   const [blogDropdownOpen, setblogDropdownOpen] = useState(false);
@@ -19,12 +19,12 @@ export default function Header({ service_title }) {
   const onTerms = route === "terms" ? true : false;
 
   return (
-    <nav className="sticky inset-0 z-20 bg-white dark:bg-gray-900 py-4 shadow border-solid border-t-2 border-blue-700">
+    <nav className="sticky inset-0 z-20 bg-white dark:bg-gray-900 py-4 shadow border-solid">
       <div className="w-full lg:container lg:mx-auto lg:flex lg:px-8 items-center justify-between">
         <div className="container mx-auto flex justify-between w-full px-8 pb-5 lg:pb-0 lg:px-0 lg:w-auto">
-          <div className="pl-1 lg:pl-0 flex items-center flex-shrink-0 text-gray-800 dark:text-gray-100">
+          {/* <div className="pl-1 lg:pl-0 flex items-center flex-shrink-0 text-gray-800 dark:text-gray-100">
             <img src="/logo.svg" height={30} width={150} />
-          </div>
+          </div> */}
           <div
             onClick={() => setMobileNavOpen((prev) => !prev)}
             className="block lg:hidden"
