@@ -1,14 +1,30 @@
+/* 
+This component is used to import MDX components to be used in other components
+*/
+
+import { useMemo } from "react";
+import { getMDXComponent } from "mdx-bundler/client";
+import Image from "./Image";
 import styles from "@/styles/Markdown.module.css";
 import NextOptimizedImage from "@/components/NextOptimizedImage";
+import CustomLink from "./Link";
 
-const MDXComponents = {
-  img: (props) => <NextOptimizedImage img_props={props} />,
-  blockquote: (props) => (
-    <blockquote {...props} className={styles.blockquote} />
-  ),
+export const MDXComponents = {
+  Image,
+  a: CustomLink,
+  wrapper: ({ components, layout, ...rest }) => {
+    const Layout = require(`../layouts/${layout}`).default;
+    return <Layout {...rest} />;
+  },
+  // img: (props) => <NextOptimizedImage img_props={props} />,
+  // blockquote: (props) => (
+  //   <blockquote {...props} className={styles.blockquote} />
+  // ),
   //p: (props) => <p {...props} className={styles.p} />,
-  //a: (props) => <a {...props} className={styles.link} />,
   //h1: (props) => <h1 {...props} className={styles.postTitle} />,
 };
 
-export default MDXComponents;
+export const MDXLayoutRenderer = ({ layout, mdxSource, ...rest }) => {
+  const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
+  return <MDXLayout layout={layout} components={MDXComponents} {...rest} />;
+};

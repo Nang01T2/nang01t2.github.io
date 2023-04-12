@@ -2,20 +2,34 @@ import "@/styles/tailwind.css";
 import "@/styles/global.scss";
 import "@/styles/code-highlighting.scss";
 
+import Head from "next/head";
 import { MDXProvider } from "@mdx-js/react";
-import MDXComponents from "@/components/MDXComponents";
+//import MDXComponents from "@/components/MDXComponents";
 import MDXLayout from "@/components/MDXLayout";
-import Layout from "@/components/Layout";
+import AppLayout from "@/layouts/AppLayout";
 import { ThemeProvider } from "next-themes";
+import siteMetadata from "@/lib/siteMetadata";
 
 export default function App({ Component, pageProps }) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
+      <Head>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+      </Head>
+      {/* <Analytics /> */}
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
+    </ThemeProvider>
+  );
+
   switch (pageProps.layout) {
     case "main": {
       console.log("Main Layout");
       return (
         <ThemeProvider enableSystem={true} attribute="class">
           <div className="dark:bg-gray-700 dark:text-gray-200 text-gray-700 transition-colors duration-300 min-h-screen select-none">
-            <Layout currentPage={pageProps.currentPage}>
+            <Layout>
               <Component {...pageProps} />
             </Layout>
           </div>
