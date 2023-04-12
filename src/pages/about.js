@@ -1,11 +1,10 @@
-import { MDXLayoutRenderer } from "@/components/MDXComponents";
-import { getFileBySlug } from "@/lib/mdx";
+import { MDXLayoutRenderer } from '@/components/MDXComponents';
+import { getFileBySlug } from '@/lib/mdx';
 
-const DEFAULT_LAYOUT = "DefaultLayout";
+const DEFAULT_LAYOUT = 'DefaultLayout';
 
 export async function getStaticProps() {
-  const authorDetails = await getFileBySlug("misc", "about");
-  console.log("authorDetails", authorDetails);
+  const authorDetails = await getFileBySlug('misc', 'about');
   return { props: { authorDetails } };
 }
 

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./syntax-highlighting.css";
+@import './syntax-highlighting.css';
 
 .italic {
   @apply text-left tracking-wide py-6 not-italic font-poetry text-xl md:text-2xl;
@@ -16,11 +16,11 @@
   font-family: monospace;
 }
 
-.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+.prose :where(blockquote):not(:where([class~='not-prose'] *)) {
   border-left-width: 0.5rem;
   quotes: none;
   margin-top: 4em;
-  font-family: "IBM Plex Mono";
+  font-family: 'IBM Plex Mono';
   font-weight: normal;
   font-style: normal;
   font-size: 1em;
@@ -30,11 +30,11 @@
 }
 
 @media (min-width: 640px) {
-  .prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+  .prose :where(blockquote):not(:where([class~='not-prose'] *)) {
     border-left-width: 0.5rem;
     quotes: none;
     margin-top: 4em;
-    font-family: "IBM Plex Mono";
+    font-family: 'IBM Plex Mono';
     font-weight: normal;
     font-style: normal;
     font-size: 1.25em;
@@ -44,7 +44,7 @@
   }
 }
 
-.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+.prose :where(blockquote):not(:where([class~='not-prose'] *)) {
   @apply sm:text-xl;
 }
 
@@ -64,7 +64,7 @@
   @apply my-5;
 }
 
-[type="checkbox"] {
+[type='checkbox'] {
   margin-right: 1em;
 }
 
@@ -74,22 +74,22 @@
 
 .dark
   .dark\:prose-dark
-  :where(ol li):not(:where([class~="not-prose"] *))::marker {
+  :where(ol li):not(:where([class~='not-prose'] *))::marker {
   font-weight: 600 !important;
   color: #79a8ff !important;
 }
-.prose :where(ol li):not(:where([class~="not-prose"] *))::marker {
+.prose :where(ol li):not(:where([class~='not-prose'] *))::marker {
   font-weight: 600 !important;
   color: #364a70 !important;
 }
 
 .dark
   .dark\:prose-dark
-  :where(ul li):not(:where([class~="not-prose"] *))::marker {
+  :where(ul li):not(:where([class~='not-prose'] *))::marker {
   font-weight: 600 !important;
   color: #79a8ff !important;
 }
-.prose :where(ul li):not(:where([class~="not-prose"] *))::marker {
+.prose :where(ul li):not(:where([class~='not-prose'] *))::marker {
   font-weight: 600 !important;
   color: #364a70 !important;
 }
@@ -99,7 +99,7 @@ input:-webkit-autofill:focus {
   transition: background-color 600000s 0s, color 600000s 0s;
 }
 
-.dark .dark\:prose-dark :where(code):not(:where([class~="not-prose"] *)) {
+.dark .dark\:prose-dark :where(code):not(:where([class~='not-prose'] *)) {
   color: #c9b457;
   font-weight: 400;
   font-size: 1.05em;
@@ -107,7 +107,7 @@ input:-webkit-autofill:focus {
   overflow-wrap: break-word;
 }
 
-.prose :where(code):not(:where([class~="not-prose"] *)) {
+.prose :where(code):not(:where([class~='not-prose'] *)) {
   color: #000000;
   font-weight: 400;
   font-size: 1.05em;
@@ -115,22 +115,22 @@ input:-webkit-autofill:focus {
   overflow-wrap: break-word;
 }
 
-.dark .dark\:prose-dark :where(pre):not(:where([class~="not-prose"] *)) {
+.dark .dark\:prose-dark :where(pre):not(:where([class~='not-prose'] *)) {
   color: #fffbf0;
   background-color: #000000 !important;
 }
 
-.dark .dark\:prose-dark :where(pre code):not(:where([class~="not-prose"] *)) {
+.dark .dark\:prose-dark :where(pre code):not(:where([class~='not-prose'] *)) {
   color: #fffbf0;
   background-color: #000000 !important;
 }
 
-.prose :where(pre):not(:where([class~="not-prose"] *)) {
+.prose :where(pre):not(:where([class~='not-prose'] *)) {
   background-color: #1e293b;
   color: #fffbf0;
 }
 
-.prose :where(pre code):not(:where([class~="not-prose"] *)) {
+.prose :where(pre code):not(:where([class~='not-prose'] *)) {
   background-color: #1e293b;
   color: #fffbf0;
 }
@@ -151,48 +151,48 @@ input:-webkit-autofill:focus {
   color: #ff86ebcb;
 }
 
-.prose :where(h1):not(:where([class~="not-prose"] *)) {
+.prose :where(h1):not(:where([class~='not-prose'] *)) {
   font-size: 2.6em;
   font-weight: bold;
   padding-top: 0.6em;
   padding-bottom: 0.55em;
-  font-family: "IBM Plex Mono";
+  font-family: 'IBM Plex Mono';
   overflow-wrap: break-word;
 }
 
-.prose :where(h2):not(:where([class~="not-prose"] *)) {
+.prose :where(h2):not(:where([class~='not-prose'] *)) {
   font-size: 2em;
   font-weight: bold;
   padding-top: 0.55em;
   padding-bottom: 0.4em;
-  font-family: "IBM Plex Mono";
+  font-family: 'IBM Plex Mono';
   overflow-wrap: break-word;
 }
 
-.prose :where(h3):not(:where([class~="not-prose"] *)) {
+.prose :where(h3):not(:where([class~='not-prose'] *)) {
   font-size: 1.8em;
   font-weight: bold;
   padding-top: 0.4em;
   padding-bottom: 0.35em;
-  font-family: "IBM Plex Mono";
+  font-family: 'IBM Plex Mono';
   overflow-wrap: break-word;
 }
 
-.prose :where(h4):not(:where([class~="not-prose"] *)) {
+.prose :where(h4):not(:where([class~='not-prose'] *)) {
   font-size: 1.4em;
   font-weight: bold;
   padding-top: 0.35em;
   padding-bottom: 0.15em;
-  font-family: "IBM Plex Mono";
+  font-family: 'IBM Plex Mono';
   overflow-wrap: break-word;
 }
 
-.prose :where(h5):not(:where([class~="not-prose"] *)) {
+.prose :where(h5):not(:where([class~='not-prose'] *)) {
   font-size: 1.2em;
   font-weight: bold;
   padding-top: 0.15em;
   padding-bottom: 0.1em;
-  font-family: "IBM Plex Mono";
+  font-family: 'IBM Plex Mono';
   overflow-wrap: break-word;
 }
 

@@ -20,7 +20,7 @@ export default function Tags({ tags }) {
         description="Things I blog about"
       /> */}
 
-      <div className="flex flex-col items-start justify-start divide-y divide-gray-200 dark:divide-gray-700 md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6 md:divide-y-0">
+      <div className="flex flex-col items-start justify-start divide-y divide-gray-200 dark:divide-gray-700 mx-20 sm:mt-24 md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6 md:divide-y-0">
         <div className="flex flex-wrap mx-5">
           {Object.keys(tags).length === 0 && 'No tags found.'}
           {sortedTags.map((t) => {

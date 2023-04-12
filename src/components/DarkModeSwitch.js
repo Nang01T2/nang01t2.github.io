@@ -1,7 +1,7 @@
-import { MdLightMode } from "react-icons/md";
-import { BsMoon } from "react-icons/bs";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { MdLightMode } from 'react-icons/md';
+import { BsMoon } from 'react-icons/bs';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export default function DarkModeSwitch() {
   const { systemTheme, theme, setTheme } = useTheme();
@@ -9,19 +9,19 @@ export default function DarkModeSwitch() {
 
   useEffect(() => setMounted(true), []);
 
-  const currentTheme = theme === "system" ? systemTheme : theme;
+  const currentTheme = theme === 'system' ? systemTheme : theme;
   return (
     <>
       {mounted &&
-        (currentTheme === "dark" ? (
+        (currentTheme === 'dark' ? (
           <MdLightMode
-            className="flex justify-center items-center text-md text-white lg:text-current px-3 w-full h-10 py-2 rounded bg-blue-700 font-bold hover:bg-blue-800 lg:mt-0 lg:bg-transparent lg:hover:bg-transparent cursor-pointer"
-            onClick={() => setTheme("light")}
+            className="ml-1 mr-1 h-8 w-8 rounded p-1 sm:ml-4 cursor-pointer"
+            onClick={() => setTheme('light')}
           />
         ) : (
           <BsMoon
-            className="flex justify-center items-center text-md text-white lg:text-current px-3 w-full h-10 py-2 rounded bg-blue-700 font-bold hover:bg-blue-800 lg:mt-0 lg:bg-transparent lg:hover:bg-transparent cursor-pointer"
-            onClick={() => setTheme("dark")}
+            className="ml-1 mr-1 h-8 w-8 rounded p-1 sm:ml-4 cursor-pointer"
+            onClick={() => setTheme('dark')}
           />
         ))}
     </>

@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { getAllPostsMetadata } from "@/lib/get-posts-data";
-import CardLayout from "@/components/CardLayout";
-import styles from "@/styles/Home.module.css";
+import { useState } from 'react';
+import { getAllPostsMetadata } from '@/lib/get-posts-data';
+import CardLayout from '@/components/CardLayout';
 
 export default function Home({ postsMetaData }) {
   const [filteredPosts, setFilteredPosts] = useState(postsMetaData);
@@ -17,7 +16,7 @@ export default function Home({ postsMetaData }) {
 
   return (
     <>
-      <div>
+      <div className="divide-y divide-gray-700 dark:divide-gray-700">
         <CardLayout postsMetaData={filteredPosts} />
         {/* <button onClick={loadMorePosts} className={styles.button}>
           Load more
@@ -33,7 +32,7 @@ export async function getStaticProps() {
   return {
     props: {
       postsMetaData,
-      layout: "main",
+      layout: 'main',
     },
   };
 }

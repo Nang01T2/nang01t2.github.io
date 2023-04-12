@@ -1,15 +1,15 @@
-import Header from "@/components/Header";
-import React from "react";
-import AppContainer from "../components/AppContainer";
-import Footer from "../components/Footer";
+import Header from '@/components/Header';
+import React from 'react';
+import AppContainer from '../components/AppContainer';
+import Footer from '../components/Footer';
 
 export default function AppLayout({ children }) {
   return (
     <>
       <AppContainer>
-        <div className="flex h-screen flex-col justify-between">
+        <div className="flex min-h-screen flex-col justify-between">
           <Header />
-          <main className="mb-auto">{children}</main>
+          <main className="mx-auto w-full flex-1 px-4 sm:px-8">{children}</main>
           <Footer />
         </div>
       </AppContainer>
