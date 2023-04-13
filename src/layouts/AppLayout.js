@@ -9,7 +9,9 @@ export default function AppLayout({ children }) {
       <AppContainer>
         <div className="flex min-h-screen flex-col justify-between">
           <Header />
-          <main className="mx-auto w-full flex-1 px-4 sm:px-8">{children}</main>
+          <main className="mx-auto w-full flex-1 px-4 sm:px-8 py-20">
+            {children}
+          </main>
           <Footer />
         </div>
       </AppContainer>

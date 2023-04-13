@@ -15,10 +15,11 @@ export const MDXComponents = {
   ImageGallery,
   Image,
   a: CustomLink,
-  // wrapper: ({ props, components, layout, ...rest }) => {
-  //   //const Layout = require(`../layouts/${layout}`).default;
-  //   //return <Layout {...rest} />;
-  // },
+  wrapper: ({ components, layout, ...rest }) => {
+    console.log('Wrapper - layout', layout);
+    const Layout = require(`../layouts/${layout ?? 'DefaultLayout'}`).default;
+    return <Layout {...rest} />;
+  },
   // img: (props) => <NextOptimizedImage img_props={props} />,
   // blockquote: (props) => (
   //   <blockquote {...props} className={styles.blockquote} />
@@ -28,6 +29,7 @@ export const MDXComponents = {
 };
 
 export const MDXLayoutRenderer = ({ layout, mdxSource, ...rest }) => {
+  console.log('MDXLayoutRenderer - layout: ', layout);
   const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
   return <MDXLayout layout={layout} components={MDXComponents} {...rest} />;
 };
