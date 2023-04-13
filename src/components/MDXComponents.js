@@ -15,10 +15,10 @@ export const MDXComponents = {
   ImageGallery,
   Image,
   a: CustomLink,
-  wrapper: ({ components, layout, ...rest }) => {
-    const Layout = require(`../layouts/${layout}`).default;
-    return <Layout {...rest} />;
-  },
+  // wrapper: ({ props, components, layout, ...rest }) => {
+  //   //const Layout = require(`../layouts/${layout}`).default;
+  //   //return <Layout {...rest} />;
+  // },
   // img: (props) => <NextOptimizedImage img_props={props} />,
   // blockquote: (props) => (
   //   <blockquote {...props} className={styles.blockquote} />

@@ -8,8 +8,11 @@ import MDXLayout from '@/components/MDXLayout';
 import AppLayout from '@/layouts/AppLayout';
 import { ThemeProvider } from 'next-themes';
 import siteMetadata from '@/lib/siteMetadata';
+import { MDXComponents } from "@/components/MDXComponents";
 
 export default function App({ Component, pageProps }) {
+  console.log("pageProps", pageProps);
+  console.log("Component", Component);
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <Head>
@@ -17,14 +20,16 @@ export default function App({ Component, pageProps }) {
       </Head>
       {/* <Analytics /> */}
       <AppLayout>
-        <Component {...pageProps} />
+        <MDXProvider components={{}}>
+          <Component {...pageProps} />
+        </MDXProvider>
       </AppLayout>
     </ThemeProvider>
   );
 
   switch (pageProps.layout) {
-    case 'main': {
-      console.log('Main Layout');
+    case "main": {
+      console.log("Main Layout");
       return (
         <ThemeProvider enableSystem={true} attribute="class">
           <div className="dark:bg-gray-700 dark:text-gray-200 text-gray-700 transition-colors duration-300 min-h-screen select-none">
@@ -35,8 +40,8 @@ export default function App({ Component, pageProps }) {
         </ThemeProvider>
       );
     }
-    case 'next-mdx-remote': {
-      console.log('MDX Layout');
+    case "next-mdx-remote": {
+      console.log("MDX Layout");
       return (
         <ThemeProvider enableSystem={true} attribute="class">
           <div className="dark:bg-gray-700 dark:text-gray-200 text-gray-700 transition-colors duration-300 min-h-screen select-none">
@@ -49,7 +54,7 @@ export default function App({ Component, pageProps }) {
     }
     // for @next/mdx
     default: {
-      console.log('Default Layout');
+      console.log("Default Layout");
       return (
         <ThemeProvider enableSystem={true} attribute="class">
           <MDXLayout>
