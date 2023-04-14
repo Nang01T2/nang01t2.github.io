@@ -28,11 +28,9 @@ export default function Home({ postsMetaData }) {
 
 export async function getStaticProps() {
   const postsMetaData = getAllPostsMetadata(1);
-  //console.log("postsMetaData", postsMetaData);
   return {
     props: {
       postsMetaData,
-      layout: 'main',
     },
   };
 }
