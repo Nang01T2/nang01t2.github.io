@@ -3,7 +3,6 @@ This component allows for the creation of table of contents
 */
 
 const TOCInline = ({
-  tmp,
   toc,
   indentDepth = 3,
   fromHeading = 1,
@@ -11,8 +10,6 @@ const TOCInline = ({
   asDisclosure = false,
   exclude = '',
 }) => {
-  console.log('TOCCCC', toc);
-  console.log('tmp', tmp);
   const re = Array.isArray(exclude)
     ? new RegExp('^(' + exclude.join('|') + ')$', 'i')
     : new RegExp('^(' + exclude + ')$', 'i');

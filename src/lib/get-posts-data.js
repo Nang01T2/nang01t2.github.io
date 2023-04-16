@@ -2,10 +2,36 @@
 //import {metadata, _importMeta as postPaths} from '../posts/*'
 
 import getAllFilesRecursively from './utils/files';
+import path from 'path';
+import fs from 'fs';
+import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
+//import readingTime from 'reading-time';
 
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
+import remarkMath from 'remark-math';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkGfm from 'remark-gfm';
+import remarkTocHeadings from '@/lib/remark-toc-headings';
+
+import rehypeKatex from 'rehype-katex';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrettyCode from 'rehype-pretty-code';
+
+const rehypePrettyCodeOptions = {
+  theme: 'one-dark-pro',
+  onVisitLine(node) {
+    if (node.children.length === 0) {
+      node.children = [{ type: 'text', value: ' ' }];
+    }
+  },
+  onVisitHighlightedLine(node) {
+    node.properties.className.push('highlighted');
+  },
+  onVisitHighlightedWord(node) {
+    node.properties.className = ['word'];
+  },
+};
 
 // current 'posts' directory
 const postsDirectory = path.join(process.cwd(), 'posts');
@@ -117,20 +143,57 @@ export function getPostMetadata(id) {
   return postMetadata;
 }
 
-export async function getPostDataById(type, id) {
-  //console.log('type', type);
-  //console.log('id', id);
+export async function getFileBySlug(type, id) {
   const mdxPath = path.join(postsDirectory, type, `${id}.mdx`);
   const mdPath = path.join(postsDirectory, type, `${id}.md`);
 
   const fullPath = fs.existsSync(mdxPath) ? mdxPath : mdPath;
-  console.log('fullPath', fullPath);
-  // get MDX metadata and content
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  // get metadata, content
-  const { data, content } = matter(fileContents);
+  //console.log('fullPath', fullPath);
 
-  return { metadata: data, content: content };
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+  let toc = [];
+  const mdxSource = await serialize(fileContents, {
+    mdxOptions: {
+      remarkPlugins: [
+        //remarkFrontmatter,
+        remarkMath,
+        remarkGfm,
+        //[remarkTocHeadings, { exportRef: toc }],
+      ],
+      rehypePlugins: [
+        rehypeKatex,
+        // rehypeSlug,
+        // [
+        //   rehypeAutolinkHeadings,
+        //   {
+        //     properties: {
+        //       className: [
+        //         "anchor no-underline flex items-center before:-translate-x-[8px] before:-ml-[20px] before:bg-no-repeat before:bg-contain before:w-[20px] before:h-[20px] before:content-[''] hover:before:bg-[url('/link.svg')]",
+        //       ],
+        //     },
+        //     behaviour: "wrap",
+        //   },
+        // ],
+        [rehypePrettyCode, rehypePrettyCodeOptions],
+      ],
+    },
+    // Indicates whether or not to parse the frontmatter from the mdx source
+    parseFrontmatter: true,
+  });
+  const { frontmatter } = mdxSource;
+
+  return {
+    toc,
+    content: mdxSource,
+    metadata: {
+      ...frontmatter,
+      //readingTime: readingTime(fileContents),
+      slug: id || null,
+      fileName: fs.existsSync(mdxPath) ? `${id}.mdx` : `${id}.md`,
+      ///date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
+    },
+  };
 }
 
 export async function getPostData(id) {

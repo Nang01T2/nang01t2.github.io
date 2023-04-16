@@ -5,7 +5,7 @@ This component is used to import MDX components to be used in other components
 import { useMemo } from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
 import { MDXRemote } from 'next-mdx-remote';
-
+import { lazy, Suspense } from 'react';
 import Image from './Image';
 import styles from '@/styles/Markdown.module.css';
 import NextOptimizedImage from '@/components/NextOptimizedImage';
@@ -13,10 +13,10 @@ import CustomLink from './Link';
 import ImageGallery from 'react-image-gallery';
 import TOCInline from './TOCInline';
 import PageTitle from './PageTitle';
+import Pre from './Pre';
 import '../../node_modules/react-image-gallery/styles/css/image-gallery.css';
 
-import { serialize } from 'next-mdx-remote/serialize';
-import MarkdownWrapper from './MarkdownWrapper';
+//import MarkdownWrapper from './MarkdownWrapper';
 
 export const MDXComponents = {
   ImageGallery,
@@ -24,6 +24,7 @@ export const MDXComponents = {
   TOCInline,
   PageTitle,
   a: CustomLink,
+  pre: Pre,
   // wrapper: ({ components, toc, ...props }) => {
   //   console.log('MarkdownWrapper - toc', toc);
   //   return <MarkdownWrapper components={components} {...props} />;
@@ -50,10 +51,17 @@ export const MDXLayoutRenderer = ({ layout, toc, mdxSource, ...rest }) => {
   //   return <MDXRemote {...mdxSource} components={MDXComponents} />;
   // }, [mdxSource]);
   // console.log('MDXLayout', MDXLayout);
-  if (!mdxSource) return 'TODO';
+  //if (!mdxSource) return 'TODO';
+  const Layout = lazy(() => import(`../layouts/${layout ?? 'DefaultLayout'}`));
   return (
-    <MDXRemote {...mdxSource} toc={toc} components={MDXComponents} {...rest} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <Layout {...rest}>
+        <MDXRemote {...mdxSource} components={MDXComponents} />
+      </Layout>
+    </Suspense>
   );
+
+  //return <MDXRemote {...mdxSource} components={MDXComponents} />;
   //const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
   //return <MDXLayout layout={layout} components={MDXComponents} {...rest} />;
 };
