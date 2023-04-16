@@ -12,25 +12,25 @@ import rehypePrettyCode from 'rehype-pretty-code';
 
 /** @type {import("rehype-pretty-code").Options} */
 const rehypePrettyCodeOptions = {
-  theme: "one-dark-pro",
+  theme: 'one-dark-pro',
   keepBackground: false,
   onVisitLine(node) {
     if (node.children.length === 0) {
-      node.children = [{ type: "text", value: " " }];
+      node.children = [{ type: 'text', value: ' ' }];
     }
   },
   onVisitHighlightedLine(node) {
-    node.properties.className.push("highlighted");
+    node.properties.className.push('highlighted');
   },
   onVisitHighlightedWord(node) {
-    node.properties.className = ["word"];
+    node.properties.className = ['word'];
   },
 };
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    providerImportSource: "@mdx-js/react",
+    providerImportSource: '@mdx-js/react',
     remarkPlugins: [remarkFrontmatter, remarkGfm, remarkMath],
     rehypePlugins: [
       rehypeKatex,
@@ -53,16 +53,17 @@ const withMDX = createMDX({
 
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-  // images: {
-  //   //unoptimized: true,
-  //   //loader: "imgix",
-  //   //path: "https://images.unsplash.com/",
-  // },
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  images: {
+    //  Configure `images.unoptimized = true` in `next.config.js` to disable the Image Optimization API.
+    unoptimized: true,
+    //loader: "imgix",
+    //path: "https://images.unsplash.com/",
+  },
   basePath:
-    process.env.DEPLOY_TARGET === "gh-pages" ? "/nang01t2.github.io" : "",
+    process.env.DEPLOY_TARGET === 'gh-pages' ? '/nang01t2.github.io' : '',
   assetPrefix:
-    process.env.DEPLOY_TARGET === "gh-pages" ? "/nang01t2.github.io/" : "",
+    process.env.DEPLOY_TARGET === 'gh-pages' ? '/nang01t2.github.io/' : '',
 };
 
 //module.exports = nextConfig;
