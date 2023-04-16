@@ -4,7 +4,7 @@ import '@/styles/code-highlighting.scss';
 
 import Head from 'next/head';
 import { MDXProvider } from '@mdx-js/react';
-import AppLayout from '@/layouts/AppLayout';
+import AppLayout from '@/components/AppLayout';
 import { ThemeProvider } from 'next-themes';
 import siteMetadata from '@/lib/siteMetadata';
 import { MDXComponents } from '@/components/MDXComponents';

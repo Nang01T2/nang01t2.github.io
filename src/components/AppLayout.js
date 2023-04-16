@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
-import React from "react";
-import Footer from "../components/Footer";
+import React from 'react';
+import Footer from './Footer';
 
 export default function AppLayout({ children }) {
   return (

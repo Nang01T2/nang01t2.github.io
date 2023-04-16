@@ -1,13 +1,15 @@
 //import dynamic from 'next/dynamic';
 //import {metadata, _importMeta as postPaths} from '../posts/*'
 
-const fs = require("fs");
-const path = require("path");
-const matter = require("gray-matter");
+import getAllFilesRecursively from './utils/files';
+
+const fs = require('fs');
+const path = require('path');
+const matter = require('gray-matter');
 
 // current 'posts' directory
-const postsDirectory = path.join(process.cwd(), "posts");
-const mdx_file_extention = ".mdx";
+const postsDirectory = path.join(process.cwd(), 'posts');
+const mdx_file_extention = '.mdx';
 
 function getAllFilesInDirectory() {
   const fileNames = fs.readdirSync(postsDirectory);
@@ -30,19 +32,19 @@ export function getAllPostsPath() {
       },
     };
   });
+}
 
-  /*
-	return metadata.map((post_metadata, index) => {
-		let path = postPaths[index]?.importedPath;
-		let path_list = path.split('/');
-		path = path_list[path_list.length - 1].replace(/\.mdx$/, '');
-		return {
-			params: {
-				id: path,
-			}
-		}
-	})
-*/
+export function formatSlug(slug) {
+  return slug.replace(/\.(mdx|md)/, '');
+}
+
+export function getFiles(type) {
+  const prefixPaths = path.join(postsDirectory, type);
+  const files = getAllFilesRecursively(prefixPaths);
+  // Only want to return blog/path and ignore root, replace is needed to work on Windows
+  return files.map((file) =>
+    file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
+  );
 }
 
 export function getAllPostsMetadata(pageIndex) {
@@ -52,11 +54,11 @@ export function getAllPostsMetadata(pageIndex) {
     const fullPath = path.join(postsDirectory, parsedFile.base);
 
     // get MDX metadata and content
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
     // get metadata, content
     const { data, content } = matter(fileContents);
     let metadata = data;
-    metadata["id"] = parsedFile.name;
+    metadata['id'] = parsedFile.name;
     return { metadata, content };
   });
 
@@ -107,23 +109,39 @@ export const filterPostsByPageIndex = (posts, pageIndex) => {
 export function getPostMetadata(id) {
   const postMetadata = metadata.filter((metadata, index) => {
     let path = postPaths[index]?.importedPath;
-    let path_list = path.split("/");
-    path = path_list[path_list.length - 1].replace(/\.mdx$/, "");
+    let path_list = path.split('/');
+    path = path_list[path_list.length - 1].replace(/\.mdx$/, '');
     //console.log(path, id);
     if (path == id) return { metadata };
   });
   return postMetadata;
 }
 
-export function getPostData(id) {
+export async function getPostDataById(type, id) {
+  //console.log('type', type);
+  //console.log('id', id);
+  const mdxPath = path.join(postsDirectory, type, `${id}.mdx`);
+  const mdPath = path.join(postsDirectory, type, `${id}.md`);
+
+  const fullPath = fs.existsSync(mdxPath) ? mdxPath : mdPath;
+  console.log('fullPath', fullPath);
+  // get MDX metadata and content
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  // get metadata, content
+  const { data, content } = matter(fileContents);
+
+  return { metadata: data, content: content };
+}
+
+export async function getPostData(id) {
   const fullPath = path.join(postsDirectory, id + mdx_file_extention);
   // get MDX metadata and content
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
   // get metadata, content
   const { data, content } = matter(fileContents);
 
   let metadata = data;
-  metadata["id"] = id;
+  metadata['id'] = id;
 
   return { metadata: metadata, content: content };
 
@@ -137,4 +155,3 @@ export function getPostData(id) {
 	}
 */
 }
-
