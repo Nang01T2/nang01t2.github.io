@@ -1,4 +1,4 @@
-import siteMetadata from "../siteMetadata";
+import siteMetadata from "../../data/siteMetadata";
 
 const formatDate = (date) => {
   const options = {

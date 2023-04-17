@@ -1,4 +1,4 @@
-import { getAllPostsMetadata } from "@/lib/get-posts-data";
+import { getAllPostsMetadata } from "@/lib/mdx";
 
 export default function handler(req, res) {
   const { page } = req.query;

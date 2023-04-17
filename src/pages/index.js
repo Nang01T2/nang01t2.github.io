@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { getAllPostsMetadata } from '@/lib/get-posts-data';
-import CardLayout from '@/components/CardLayout';
+import { getAllPostsMetadata } from "@/lib/mdx";
+import CardLayout from "@/components/CardLayout";
 
 export default function Home({ postsMetaData }) {
   const [filteredPosts, setFilteredPosts] = useState(postsMetaData);
@@ -28,6 +28,7 @@ export default function Home({ postsMetaData }) {
 
 export async function getStaticProps() {
   const postsMetaData = getAllPostsMetadata(1);
+  //console.log("postsMetaData", postsMetaData);
   return {
     props: {
       postsMetaData,

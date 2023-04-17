@@ -2,7 +2,7 @@
 This component renders the buttons to scroll to top and to scroll to buttom (comment)
 */
 
-import siteMetadata from '@/lib/siteMetadata';
+import siteMetadata from "@/data/siteMetadata";
 import { useEffect, useState } from 'react';
 
 const ScrollTopAndComment = () => {

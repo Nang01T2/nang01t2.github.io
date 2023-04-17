@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import siteMetadata from '@/lib/siteMetadata';
+import siteMetadata from "@/data/siteMetadata";
 import headerNavLinks from '@/data/headerNavLinks';
 import DarkModeSwitch from './DarkModeSwitch';
 import MobileNav from './MobileNav';

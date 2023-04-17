@@ -1,7 +1,7 @@
 import { MDXLayoutRenderer } from '@/components/MDXComponents';
 import UnderConstruction from "@/components/UnderConstruction";
 
-import { formatSlug, getFiles, getFileBySlug } from "@/lib/get-posts-data";
+import { formatSlug, getFiles, getFileBySlug } from "@/lib/mdx";
 
 export async function getStaticPaths() {
   const blogFiles = getFiles("blog");
