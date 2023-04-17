@@ -10,7 +10,7 @@ const siteMetadata = {
   author: "Nang Nguyen",
   email: "thaonguyen83.dn@gmail.com",
   headerTitle: "👨‍💻",
-  description: "My personal blog.",
+  description: "Nang Nguyen blog.",
   siteLogo: "/static/images/logo.png",
   image: "/static/images/avatar.png",
   socialBanner: "/static/images/twitter-card.png",

@@ -2,13 +2,9 @@
 This component is used to import MDX components to be used in other components
 */
 
-import { useMemo } from 'react';
-import { getMDXComponent } from 'mdx-bundler/client';
 import { MDXRemote } from 'next-mdx-remote';
 import { lazy, Suspense } from 'react';
 import Image from './Image';
-import styles from '@/styles/Markdown.module.css';
-import NextOptimizedImage from '@/components/NextOptimizedImage';
 import CustomLink from './Link';
 import ImageGallery from 'react-image-gallery';
 import TOCInline from './TOCInline';

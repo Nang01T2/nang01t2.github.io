@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { getAllPostsMetadata } from "@/lib/mdx";
-import CardLayout from "@/components/CardLayout";
+import { getAllPostsMetadata } from '@/lib/mdx';
+import CardLayout from '@/components/CardLayout';
+import { NextSeo } from 'next-seo';
+import siteMetadata from '@/data/siteMetadata';
 
 export default function Home({ postsMetaData }) {
   const [filteredPosts, setFilteredPosts] = useState(postsMetaData);
@@ -16,6 +18,10 @@ export default function Home({ postsMetaData }) {
 
   return (
     <>
+      <NextSeo
+        title={siteMetadata.title}
+        description={siteMetadata.description}
+      />
       <div className="divide-y divide-gray-700 dark:divide-gray-700">
         <CardLayout postsMetaData={filteredPosts} />
         {/* <button onClick={loadMorePosts} className={styles.button}>

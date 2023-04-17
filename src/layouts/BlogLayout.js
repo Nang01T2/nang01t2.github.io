@@ -17,7 +17,7 @@ export default function BlogLayout({ frontMatter, next, prev, children }) {
           <PageTitle tagsKey={tags}>{title}</PageTitle>
         </div>
         <div>
-          {tags.map((tag) => (
+          {tags?.map((tag) => (
             <Tag key={tag} text={tag} />
           ))}
         </div>
