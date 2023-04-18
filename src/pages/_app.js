@@ -6,22 +6,27 @@ import Head from 'next/head';
 import { MDXProvider } from '@mdx-js/react';
 import AppLayout from '@/components/AppLayout';
 import { ThemeProvider } from 'next-themes';
-import siteMetadata from "@/data/siteMetadata";
+import siteMetadata from '@/data/siteMetadata';
 import { MDXComponents } from '@/components/MDXComponents';
-//import "tw-elements";
+import Layout from '@/components/layouts/Layout';
+import useKBarAction from '@/libs/useKBarAction';
+import { KBarProvider } from 'kbar';
 
 export default function App({ Component, pageProps }) {
+  const actions = useKBarAction();
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       {/* <Analytics /> */}
-      <AppLayout>
+      <Layout>
         <MDXProvider components={MDXComponents}>
-          <Component {...pageProps} />
+          <KBarProvider actions={actions} options={{ enableHistory: true }}>
+            <Component {...pageProps} />
+          </KBarProvider>
         </MDXProvider>
-      </AppLayout>
+      </Layout>
     </ThemeProvider>
   );
 }

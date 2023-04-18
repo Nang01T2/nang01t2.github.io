@@ -54,6 +54,13 @@ const withMDX = createMDX({
 const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  swcMinify: true,
+  experimental: {
+    fontLoaders: [
+      { loader: 'next/font/google', options: { subsets: ['latin'] } },
+    ],
+    largePageDataBytes: 128 * 100000,
+  },
   images: {
     //  Configure `images.unoptimized = true` in `next.config.js` to disable the Image Optimization API.
     unoptimized: true,

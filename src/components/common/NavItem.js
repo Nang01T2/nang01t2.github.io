@@ -1,19 +1,19 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { $ } from "@/libs/core";
+import { $ } from '@/libs/core';
 
-import LinkHover from "./LinkHover";
+import LinkHover from './LinkHover';
 
 export default function NavItem({ href, children, className, ...props }) {
   const router = useRouter();
-  const isActive = router.asPath.startsWith(href ?? "/");
+  const isActive = router.asPath.startsWith(href ?? '/');
 
   return (
     <LinkHover
       {...props}
       href={href}
       className={$(
-        isActive ? "text-primary font-semibold" : "text-secondary font-normal",
+        isActive ? 'text-primary font-semibold' : 'text-secondary font-normal',
         className
       )}
     >

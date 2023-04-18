@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import HeaderNav from './HeaderNav';
 
 export default function Layout({ children }) {
   return (

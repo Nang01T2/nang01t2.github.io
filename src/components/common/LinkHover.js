@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { $ } from "@/libs/core";
+import { $ } from '@/libs/core';
 
 export default function LinkHover({
   ref: _,
@@ -12,9 +12,9 @@ export default function LinkHover({
   return (
     <Link
       {...props}
-      href={href ?? "/"}
+      href={href ?? '/'}
       className={$(
-        "flex items-center rounded-lg transition-all hover:bg-secondary",
+        'flex items-center rounded-lg transition-all hover:bg-secondary',
         className
       )}
     >

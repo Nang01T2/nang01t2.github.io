@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getAllPostsMetadata } from '@/lib/mdx';
+import { getAllPostsMetadata } from '@/libs/mdx';
 import CardLayout from '@/components/CardLayout';
 import { NextSeo } from 'next-seo';
 import siteMetadata from '@/data/siteMetadata';

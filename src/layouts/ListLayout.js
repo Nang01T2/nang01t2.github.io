@@ -2,7 +2,7 @@ import Link from '@/components/Link';
 import Tag from '@/components/Tag';
 import { useState } from 'react';
 import Pagination from '@/components/Pagination';
-import formatDate from '@/lib/utils/formatDate';
+import formatDate from '@/libs/utils/formatDate';
 
 export default function ListLayout({
   posts,
