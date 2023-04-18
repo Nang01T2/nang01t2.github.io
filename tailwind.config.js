@@ -8,6 +8,7 @@ module.exports = {
   content: [
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/pages/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
     extend: {
@@ -140,5 +141,8 @@ module.exports = {
   // variants: {
   //   typography: ["dark"],
   // },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("tw-elements/dist/plugin"),
+  ],
 };

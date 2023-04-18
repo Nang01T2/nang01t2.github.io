@@ -1,22 +1,21 @@
-// import { MDXLayoutRenderer } from '@/components/MDXComponents';
-// import { getFileBySlug } from '@/lib/mdx';
+import { MDXLayoutRenderer } from "@/components/MDXComponents";
+import { getFileBySlug } from "@/lib/mdx";
 
-// const DEFAULT_LAYOUT = 'DefaultLayout';
+const DEFAULT_LAYOUT = "DefaultLayout";
 
-// export async function getStaticProps() {
-//   const authorDetails = await getFileBySlug('misc', 'about');
-//   return { props: { authorDetails } };
-// }
+export async function getStaticProps() {
+  const authorDetails = await getFileBySlug("misc", "about");
+  return { props: { authorDetails } };
+}
 
 export default function About({ authorDetails }) {
-  return 'ABOUT';
-  // const { mdxSource, frontMatter } = authorDetails;
+  //return 'ABOUT';
 
-  // return (
-  //   <MDXLayoutRenderer
-  //     //layout={frontMatter.layout || DEFAULT_LAYOUT}
-  //     mdxSource={mdxSource}
-  //     frontMatter={frontMatter}
-  //   />
-  // );
+  return (
+    <MDXLayoutRenderer
+      //layout={frontMatter.layout || DEFAULT_LAYOUT}
+      mdxSource={authorDetails?.content}
+      frontMatter={authorDetails?.frontMatter}
+    />
+  );
 }

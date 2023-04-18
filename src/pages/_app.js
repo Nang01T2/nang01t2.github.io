@@ -8,6 +8,7 @@ import AppLayout from '@/components/AppLayout';
 import { ThemeProvider } from 'next-themes';
 import siteMetadata from "@/data/siteMetadata";
 import { MDXComponents } from '@/components/MDXComponents';
+//import "tw-elements";
 
 export default function App({ Component, pageProps }) {
   return (
