@@ -1,0 +1,64 @@
+---
+title: '(Next.js) document fonts'
+description: ''
+icon: ''
+image: ''
+tags:
+  - next.js
+  - css
+  - tailwindcss
+draft: false
+date: 2022-12-19 22:06:32
+---
+
+`Next.js` `_document.tsx`에서 `link`를 통해서 폰트를 적용하는 방법이다.
+
+적절한 폰트를 찾는다.
+**https://fonts.google.com/**
+
+<br />
+
+```tsx:_document.tsx
+<Head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+  <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+  />
+</Head>
+```
+
+```css:globals.css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+```
+
+---
+
+`tailwindcss`
+
+```js:tailwind.config.js
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  //...
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['inter', ...fontFamily.sans],
+      },
+      //...
+    }
+};
+```
+
+```tsx:_app.tsx
+<div className="font-sans">
+  <Component {...pageProps} />
+</div>
+```

@@ -1,0 +1,99 @@
+---
+title: '(Next.js) sitemap.xml'
+description: '직접 sitemap을 만들어서 배포시키자.'
+icon: ''
+image: ''
+tags:
+  - next.js
+  - sitemap
+  - fs
+draft: false
+date: 2022-12-27 21:15:46
+---
+
+sitemap의 원리는 간단하기에 충분히 직접 만들 수 있다.
+검색 엔진에 노출시킬 페이지만 잘 명시해주면 된다.
+
+---
+
+## sitemap.xml 생성하는 script 구현
+
+핵심은 `fs.promises.writeFile`를 통해서 파일을 생성해주는 것이다.
+`getStaticPaths`에서 경로를 만드는데 활용한 함수를 활용하면 간단하게 설정을 마칠 수 있다.
+
+```ts:sitemap.config.ts
+import fs from 'fs';
+import { getAllPosts } from './src/libs/post';
+
+async function createSiteMap() {
+  const siteUrl = 'https://lavinoys.github.io';
+  const posts = getAllPosts();
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>${siteUrl}</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+${posts
+  .map(
+    (post) =>
+      `<url><loc>${siteUrl}${post.slug}</loc><changefreq>daily</changefreq><priority>0.7</priority></url>`,
+  )
+  .join('\n')}
+</urlset>`;
+
+  await fs.promises.writeFile('public/sitemap.xml', sitemap, {
+    encoding: 'utf-8',
+  });
+}
+
+void createSiteMap();
+```
+
+---
+
+## script 실행하기
+
+`ts-node`로 `typescript`을 실행시켜야하기에 관련 패키지를 설치하자.
+
+```shell
+yarn add -D ts-node
+```
+
+`Node`로 js를 실행해야하기에 `typescript`를 `commonjs`로 컴파일한다.
+
+```json:tsconfig.node.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+  }
+}
+```
+
+`build` 이전에 사이트맵을 생성해주면 된다. 그럼 `public`에 있는 사이트맵이 자연스럽게 빌드 결과물에 포함하게 된다.
+
+```diff-json:package.json
+{
+- "build": "next build",
++ "build": "yarn sitemap && next build",
++ "sitemap": "ts-node --project tsconfig.node.json ./sitemap.config.ts",
+}
+```
+
+마지막으로 컴파일된 사이트맵을 `commit`되지 않도록 해주자.
+
+```:.gitignore
+/public/sitemap*.xml
+```
+
+---
+
+## 결과물 확인하기
+
+```shell
+yarn build
+yarn start
+```
+
+http://localhost:3000/sitemap.xml
+
+[Google Search Console](https://search.google.com/search-console/sitemaps)에 사이트맵을 제출했을 때 `가져올 수 없음` 상태가 뜨게 되는데 몇일 후 확인하면 된다.
