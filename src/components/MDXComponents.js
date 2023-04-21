@@ -40,24 +40,12 @@ export const MDXComponents = {
 };
 
 export const MDXLayoutRenderer = ({ layout, toc, mdxSource, ...rest }) => {
-  //console.log('MDXLayoutRenderer - toc: ', toc);
-  //console.log('MDXLayoutRenderer - mdxSource: ', mdxSource);
-  //return 'TODO';
-  // const MDXLayout = useMemo(() => {
-  //   return <MDXRemote {...mdxSource} components={MDXComponents} />;
-  // }, [mdxSource]);
-  // console.log('MDXLayout', MDXLayout);
-  //if (!mdxSource) return 'TODO';
-  const Layout = lazy(() => import(`../layouts/${layout ?? 'DefaultLayout'}`));
+  const Layout = lazy(() => import(`../layouts/${layout ?? "DefaultLayout"}`));
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Layout {...rest}>
+      <Layout {...rest} toc={toc}>
         <MDXRemote {...mdxSource} components={MDXComponents} />
       </Layout>
     </Suspense>
   );
-
-  //return <MDXRemote {...mdxSource} components={MDXComponents} />;
-  //const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
-  //return <MDXLayout layout={layout} components={MDXComponents} {...rest} />;
 };

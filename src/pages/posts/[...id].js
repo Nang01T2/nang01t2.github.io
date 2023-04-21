@@ -32,7 +32,6 @@ export async function getStaticProps({ params }) {
 export default function PostDetail({ metadata, content, toc }) {
   console.log('TOC', toc);
   console.log('Metadata', metadata);
-  //console.log('content', content);
   return (
     <>
       {metadata?.draft !== true ? (
