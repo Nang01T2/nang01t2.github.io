@@ -40,7 +40,6 @@ export default function HeaderNav() {
   };
 
   useEffect(() => {
-    console.log('headerNavLinks', headerNavLinks);
     return function cleanup() {
       document.body.classList.remove('overflow-hidden');
     };

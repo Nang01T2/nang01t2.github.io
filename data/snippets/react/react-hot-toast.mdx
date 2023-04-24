@@ -11,22 +11,22 @@ date: '2023-01-27 21:43:35'
 
 ✨ [**react-hot-toast**](https://github.com/timolins/react-hot-toast)
 
-🔥 Hot by default
-🔩 Easily Customizable
-⏳ Promise API - Automatic loader from a promise
-🕊 Lightweight - less than 5kb including styles
-✅ Accessible
-🤯 Headless Hooks
+🔥 Hot by default\
+🔩 Easily Customizable\
+⏳ Promise API - Automatic loader from a promise\
+🕊 Lightweight - less than 5kb including styles\
+✅ Accessible\
+🤯 Headless Hooks\
 
 ---
 
-## 기본 활용법
+## Basic Usage
 
 ```shell
 yarn add react-hot-toast
 ```
 
-```tsx:_app.tsx
+```tsx title="_app.tsx"
 import { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
 
@@ -36,7 +36,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       <Toaster
         toastOptions={{
-          className: 'bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
+          className:
+            'bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
           position: 'bottom-right',
         }}
       />
@@ -50,11 +51,11 @@ toast.success('successful');
 toast.error('failed');
 ```
 
-무척 간편하다!
+It's so easy!
 
 ---
 
-## 커스텀 컴포넌트로 undo 기능 추가
+## Add undo function as custom component
 
 ```tsx
 toast((action) => (
@@ -97,7 +98,7 @@ function Toast({
         onClick={action}
         className={$(
           'cursor-pointer rounded py-1 px-2',
-          'bg-gray-150 active:bg-gray-200 dark:bg-gray-700 dark:active:bg-gray-600',
+          'bg-gray-150 active:bg-gray-200 dark:bg-gray-700 dark:active:bg-gray-600'
         )}
       >
         {buttonText}
