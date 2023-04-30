@@ -22,6 +22,7 @@ export default function SnippetListItem({ post }: { post: ReducedPost }) {
             <IconText
               Icon={CalenderIcon}
               text={dayjs(post.date).format("YY.MM.DD")}
+              className="gap-1 text-xs"
             />
           </div>
         </div>

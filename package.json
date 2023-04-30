@@ -57,5 +57,8 @@
     "title": "^3.5.3",
     "typescript": "5.0.4",
     "unist-util-visit": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/title": "^3.4.1"
   }
 }
