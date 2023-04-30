@@ -3,7 +3,7 @@ import BouncingBall from "@/components/misc/BouncingBall";
 
 export default function Home() {
   return (
-    <Container>
+    <Container className="flex flex-col justify-between">
       <BouncingBall />
     </Container>
   );

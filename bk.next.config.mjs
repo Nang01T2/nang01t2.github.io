@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 import createMDX from "@next/mdx";
+import { withContentlayer } from "next-contentlayer";
+
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -70,4 +72,5 @@ const nextConfig = {
 };
 
 //module.exports = nextConfig;
-export default withMDX(nextConfig);
+//export default withMDX(nextConfig);
+export default withContentlayer(nextConfig);

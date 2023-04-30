@@ -71,6 +71,10 @@ export default function TocBanner({
   toHeading = 6,
   exclude = "",
 }) {
+  // if (tableOfContents?.length === 0) {
+  //   return <></>;
+  // }
+
   const re = Array.isArray(exclude)
     ? new RegExp("^(" + exclude.join("|") + ")$", "i")
     : new RegExp("^(" + exclude + ")$", "i");

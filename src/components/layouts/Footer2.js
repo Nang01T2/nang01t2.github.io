@@ -133,7 +133,7 @@ const navigation = {
 export default function Footer2() {
   return (
     <>
-      <footer className="bottom-0 pb-4 ml-4 mr-4">
+      <footer className="bottom-0 py-4 ml-4 mr-4">
         <Hr className="mb-4" />
         {/* <div className="xl:grid xl:grid-cols-4 xl:gap-2">
           <div className="grid grid-cols-2 gap-8 xl:col-span-2">

@@ -13,7 +13,6 @@ export default function PageTitle({ children, tagsKey }) {
     return (
       <>
         <h1 className="text-6xl font-poetryTitle leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-8xl md:leading-14 break-words">
-          1111
           {children}
         </h1>
       </>

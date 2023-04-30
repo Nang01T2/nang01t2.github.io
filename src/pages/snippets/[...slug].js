@@ -35,7 +35,12 @@ export default function SnippetPage(props) {
   return (
     <>
       {metadata?.draft !== true ? (
-        <MDXPageLayout toc={toc} mdxSource={content} frontMatter={metadata} />
+        <MDXPageLayout
+          category="snippet"
+          toc={toc}
+          mdxSource={content}
+          frontMatter={metadata}
+        />
       ) : (
         <Container>
           <UnderConstruction />

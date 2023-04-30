@@ -14,6 +14,11 @@
 
 # production
 /build
+/public/sitemap*.xml
+/public/robots.txt
+/public/dataset.json
+/public/manifest.json
+/.bin
 
 # misc
 .DS_Store
@@ -34,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.contentlayer

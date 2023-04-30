@@ -3,13 +3,14 @@ import Footer2 from "./Footer2";
 import BottomRays from "public/footer_rays.png";
 import TopRays from "public/rays.png";
 import Image from "next/legacy/image";
+import { $ } from "@/libs/core";
 
-export default function Container(props) {
-  const { children, ...customMeta } = props;
+export default function Container({ className, ...props }) {
+  const { children } = props;
   return (
-    <div className="flex flex-col justify-between bg-white dark:bg-dark min-h-screen ">
+    <div className={$("bg-white dark:bg-dark min-h-screen ", className)}>
       <HeaderNav2 />
-      <main className="flex flex-col mx-auto max-w-6xl justify-center px-4 prose prose-lg dark:prose-dark relative pt-24">
+      <main className="flex flex-col mx-auto max-w-6xl justify-center px-4 relative pt-24">
         {/* <div className="absolute overflow-hidden -top-32 md:-top-72 md:right-36">
           <Image
             className="absolute top-0 right-0"

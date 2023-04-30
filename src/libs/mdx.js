@@ -195,16 +195,17 @@ export async function getFileBySlug(type, id) {
     parseFrontmatter: true,
   });
   const { frontmatter } = mdxSource;
-
+  const fileName = fs.existsSync(mdxPath) ? `${id}.mdx` : `${id}.md`;
   return {
     toc,
     content: mdxSource,
     metadata: {
       ...frontmatter,
+      fileName,
       readingTime: readingTime(fileContents),
-      slug: id || null,
-      fileName: fs.existsSync(mdxPath) ? `${id}.mdx` : `${id}.md`,
+      slug: [type, id].join("/") || null,
       date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
+      category: fileName?.split("/")?.at(0) ?? null,
     },
   };
 }
