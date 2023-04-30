@@ -1,15 +1,15 @@
-import React from 'react';
-import { formatSlug, getFiles, getFileBySlug } from '@/libs/mdx';
-import UnderConstruction from '@/components/UnderConstruction';
-import { MDXLayoutRenderer } from '@/components/MDXComponents';
-import PostLayout from '@/layouts/PostLayout';
+import React from "react";
+import { formatSlug, getFiles, getFileBySlug } from "@/libs/mdx";
+import UnderConstruction from "@/components/UnderConstruction";
+import MDXPageLayout from "@/components/layouts/MDXPageLayout";
+import Container from "@/components/layouts/Container";
 
 export async function getStaticPaths() {
-  const blogFiles = getFiles('snippets');
+  const blogFiles = getFiles("snippets");
   const paths = blogFiles.map((p) => {
     return {
       params: {
-        slug: formatSlug(p).split('/'),
+        slug: formatSlug(p).split("/"),
       },
     };
   });
@@ -21,8 +21,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  console.log('params', params);
-  const postData = await getFileBySlug('snippets', params?.slug.join('/'));
+  console.log("params", params);
+  const postData = await getFileBySlug("snippets", params?.slug.join("/"));
   return {
     props: {
       ...postData,
@@ -31,27 +31,15 @@ export async function getStaticProps({ params }) {
 }
 
 export default function SnippetPage(props) {
-  // return (
-  //   <PostLayout
-  //     toc={props?.toc}
-  //     mdxSource={props?.content}
-  //     frontMatter={props?.metadata}
-  //   />
-  // );
+  const { toc, content, metadata } = props;
   return (
     <>
-      {props?.metadata?.draft !== true ? (
-        <MDXLayoutRenderer
-          layout={props?.metadata?.layout || 'PostLayout'}
-          toc={props?.toc}
-          mdxSource={props?.content}
-          frontMatter={props?.metadata}
-          //authorDetails={authorDetails}
-          //prev={prev}
-          //next={next}
-        />
+      {metadata?.draft !== true ? (
+        <MDXPageLayout toc={toc} mdxSource={content} frontMatter={metadata} />
       ) : (
-        <UnderConstruction />
+        <Container>
+          <UnderConstruction />
+        </Container>
       )}
     </>
   );

@@ -2,15 +2,15 @@
 This component is used to import MDX components to be used in other components
 */
 
-import { MDXRemote } from 'next-mdx-remote';
-import { lazy, Suspense } from 'react';
-import Image from './Image';
-import CustomLink from './Link';
-import ImageGallery from 'react-image-gallery';
-import TOCInline from './TOCInline';
-import PageTitle from './PageTitle';
-import Pre from './Pre';
-import '../../node_modules/react-image-gallery/styles/css/image-gallery.css';
+import { MDXRemote } from "next-mdx-remote";
+import { lazy, Suspense } from "react";
+import Image from "./Image";
+import CustomLink from "./Link";
+import ImageGallery from "react-image-gallery";
+import TOCInline from "./TOCInline";
+import PageTitle from "./PageTitle";
+import Pre from "./Pre";
+import "../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
 //import MarkdownWrapper from './MarkdownWrapper';
 
@@ -40,7 +40,7 @@ export const MDXComponents = {
 };
 
 export const MDXLayoutRenderer = ({ layout, toc, mdxSource, ...rest }) => {
-  const Layout = lazy(() => import(`../layouts/${layout ?? "DefaultLayout"}`));
+  const Layout = lazy(() => import(`./layouts/${layout ?? "Layout"}`));
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Layout {...rest} toc={toc}>

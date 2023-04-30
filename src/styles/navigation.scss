@@ -1,0 +1,17 @@
+$sticky-breakpoint: 32em;
+
+// 1. Approximate height of sticky navigation.
+[id] {
+  @media (min-height: $sticky-breakpoint) {
+    scroll-margin-top: 100px; // 1
+  }
+}
+
+.navigation {
+  // ...
+
+  @media (min-height: $sticky-breakpoint) {
+    position: sticky;
+    top: 0;
+  }
+}

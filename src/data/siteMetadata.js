@@ -6,7 +6,7 @@ For providers remember to add them to next.config.js Security Policy section
 const siteMetadata = {
   theme: "system", // System, dark or light
   language: "en-us",
-  title: "🔥",
+  title: "🔥 Personal blog",
   author: "Nang Nguyen",
   email: "thaonguyen83.dn@gmail.com",
   headerTitle: "👨‍💻",
@@ -21,6 +21,7 @@ const siteMetadata = {
   facebook: "",
   youtube: "",
   linkedin: "",
+  codepen: "",
 
   comment: {
     provider: "giscus",
@@ -37,6 +38,21 @@ const siteMetadata = {
       lang: "en",
       darkTheme: "transparent_dark",
       themeURL: "",
+    },
+  },
+  since: 2023,
+  author: {
+    name: "Nang Nguyen",
+    photo: "",
+    bio: "Software Engineer",
+    contacts: {
+      email: "",
+      github: "",
+      twiter: "",
+      velog: "",
+      linkedin: "",
+      youtube: "",
+      instagram: "",
     },
   },
 

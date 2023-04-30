@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function ReadingProgressBar() {
   const [width, setWidth] = useState(0);
@@ -13,8 +13,10 @@ export default function ReadingProgressBar() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', scrollHeight);
-    return () => window.removeEventListener('scroll', scrollHeight);
+    //const elmnt = document.getElementById("headernav");
+    //console.log("AAA", elmnt?.offsetHeight);
+    window.addEventListener("scroll", scrollHeight);
+    return () => window.removeEventListener("scroll", scrollHeight);
   }, []);
 
   return (
@@ -23,7 +25,7 @@ export default function ReadingProgressBar() {
         .progressBar {
           position: fixed;
           z-index: 50;
-          top: 0px;
+          top: 72px;
           left: 0px;
           height: 6px;
           border-radius: 0px 2px 0px 0px;

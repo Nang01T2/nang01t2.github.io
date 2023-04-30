@@ -1,8 +1,8 @@
-import getAllFilesRecursively from './utils/files';
-import path from 'path';
-import fs from 'fs';
-import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
+import getAllFilesRecursively from "./utils/files";
+import path from "path";
+import fs from "fs";
+import matter from "gray-matter";
+import { serialize } from "next-mdx-remote/serialize";
 import readingTime from "reading-time";
 
 import remarkMath from "remark-math";
@@ -20,6 +20,7 @@ import rehypePresetMinify from "rehype-preset-minify";
 
 const rehypePrettyCodeOptions = {
   theme: "one-dark-pro",
+  keepBackground: true,
   onVisitLine(node) {
     if (node.children.length === 0) {
       node.children = [{ type: "text", value: " " }];
@@ -36,7 +37,7 @@ const rehypePrettyCodeOptions = {
 const root = process.cwd();
 
 // current 'posts' directory
-const dataFolder = "data";
+const dataFolder = "posts";
 const postsDirectory = path.join(root, dataFolder);
 const mdx_file_extention = ".mdx";
 
@@ -168,7 +169,7 @@ export async function getFileBySlug(type, id) {
     mdxOptions: {
       remarkPlugins: [
         remarkFrontmatter,
-        //remarkExtractFrontmatter,
+        remarkExtractFrontmatter,
         remarkMath,
         remarkGfm,
         [remarkTocHeadings, { exportRef: toc }],
@@ -181,11 +182,9 @@ export async function getFileBySlug(type, id) {
           rehypeAutolinkHeadings,
           {
             properties: {
-              className: [
-                "anchor no-underline flex items-center before:-translate-x-[8px] before:-ml-[20px] before:bg-no-repeat before:bg-contain before:w-[20px] before:h-[20px] before:content-[''] hover:before:bg-[url('/link.svg')]",
-              ],
+              className: ["anchor"],
+              ariaLabel: "anchor",
             },
-            behaviour: "wrap",
           },
         ],
         [rehypePrettyCode, rehypePrettyCodeOptions],
@@ -213,12 +212,12 @@ export async function getFileBySlug(type, id) {
 export async function getPostData(id) {
   const fullPath = path.join(postsDirectory, id + mdx_file_extention);
   // get MDX metadata and content
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fileContents = fs.readFileSync(fullPath, "utf8");
   // get metadata, content
   const { data, content } = matter(fileContents);
 
   let metadata = data;
-  metadata['id'] = id;
+  metadata["id"] = id;
 
   return { metadata: metadata, content: content };
 
@@ -243,12 +242,12 @@ export async function getAllFilesFrontMatter(folder) {
   files.forEach((file) => {
     //console.log('File', file);
     // Replace is needed to work on Windows
-    const fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, '/');
+    const fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, "/");
     // Remove Unexpected File
-    if (path.extname(fileName) !== '.md' && path.extname(fileName) !== '.mdx') {
+    if (path.extname(fileName) !== ".md" && path.extname(fileName) !== ".mdx") {
       return;
     }
-    const source = fs.readFileSync(file, 'utf8');
+    const source = fs.readFileSync(file, "utf8");
     const { data: frontmatter } = matter(source);
     if (frontmatter.draft !== true) {
       //console.log('frontmatter', frontmatter);
