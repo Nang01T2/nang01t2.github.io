@@ -4,7 +4,7 @@ import headerNavLinks from "@/data/headerNavLinks";
 
 function NavItem({ href, text, ...props }) {
   const router = useRouter();
-  const isActive = router.asPath === href;
+  const isActive = router.asPath.startsWith(href ?? "/");
 
   return (
     <Link {...props} href={href} passHref>

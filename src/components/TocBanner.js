@@ -63,19 +63,40 @@ const useScroll = (tableOfContents) => {
   return { tableOfContents, currentSectionSlug };
 };
 
-export default function TocBanner({ tableOfContents, className }) {
-  const { currentSectionSlug } = useScroll(tableOfContents);
+export default function TocBanner({
+  tableOfContents,
+  className,
+  indentDepth = 3,
+  fromHeading = 1,
+  toHeading = 6,
+  exclude = "",
+}) {
+  const re = Array.isArray(exclude)
+    ? new RegExp("^(" + exclude.join("|") + ")$", "i")
+    : new RegExp("^(" + exclude + ")$", "i");
 
-  const isSubSectionActive = (subSection) => {
-    return subSection.href === currentSectionSlug;
-  };
+  const filteredToc = tableOfContents.filter(
+    (heading) =>
+      heading.depth >= fromHeading &&
+      heading.depth <= toHeading &&
+      !re.test(heading.value)
+  );
 
-  const isSectionActive = (section) => {
-    return (
-      section.url === currentSectionSlug ||
-      section.subSections?.some((v) => v.href === currentSectionSlug)
-    );
-  };
+  const tocList = (
+    <ul
+      id="toc-content"
+      className="mt-2 flex flex-col items-start justify-start text-sm"
+    >
+      {filteredToc.map((heading) => (
+        <li
+          key={heading.value}
+          className={`${heading.depth >= indentDepth && "ml-6"}`}
+        >
+          <a href={heading.url}>{heading.value}</a>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <div
@@ -92,61 +113,7 @@ export default function TocBanner({ tableOfContents, className }) {
           >
             Table of content
           </p>
-          <ul
-            id="toc-content"
-            className="mt-2 flex flex-col items-start justify-start text-sm"
-          >
-            {tableOfContents?.map((section) => (
-              <Fragment key={section.url}>
-                <li>
-                  <a
-                    href={`${section.url}`}
-                    className={$(
-                      "group block py-1",
-                      section.subSections && "",
-                      isSectionActive(section)
-                        ? "bg-gradient-to-r from-neutral-700 to-yellow-900 bg-clip-text font-extrabold text-transparent dark:from-yellow-400 dark:to-yellow-600"
-                        : "text-secondary hover:text-primary hover:drop-shadow-base-bold dark:hover:drop-shadow-base"
-                    )}
-                  >
-                    {section.value}
-                  </a>
-                </li>
-                {section.subSections?.map((subSection) => (
-                  <li key={subsection.href} className="ml-4">
-                    <a
-                      href={`#${subsection.href}`}
-                      className={$(
-                        "group flex items-start py-1",
-                        isSubSectionActive(subSection)
-                          ? "bg-gradient-to-r from-neutral-700 to-yellow-900 bg-clip-text font-extrabold text-transparent dark:from-yellow-400 dark:to-yellow-600"
-                          : "text-secondary hover:text-primary hover:drop-shadow-base-bold dark:hover:drop-shadow-base"
-                      )}
-                    >
-                      <svg
-                        width="3"
-                        height="24"
-                        viewBox="0 -9 3 24"
-                        className={$(
-                          "mr-2 overflow-visible",
-                          "text-tertiary group-hover:text-secondary"
-                        )}
-                      >
-                        <path
-                          d="M0 0L3 3L0 6"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      {subsection.value}
-                    </a>
-                  </li>
-                ))}
-              </Fragment>
-            ))}
-          </ul>
+          {tocList}
         </div>
       )}
       <div

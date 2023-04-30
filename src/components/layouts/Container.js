@@ -9,7 +9,7 @@ export default function Container(props) {
   return (
     <div className="flex flex-col justify-between bg-white dark:bg-dark min-h-screen ">
       <HeaderNav2 />
-      <main className="flex flex-col mx-auto max-w-6xl justify-center px-4 bg-white dark:bg-dark prose prose-lg dark:prose-dark relative pt-24">
+      <main className="flex flex-col mx-auto max-w-6xl justify-center px-4 prose prose-lg dark:prose-dark relative pt-24">
         {/* <div className="absolute overflow-hidden -top-32 md:-top-72 md:right-36">
           <Image
             className="absolute top-0 right-0"

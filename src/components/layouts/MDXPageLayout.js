@@ -58,12 +58,12 @@ export default function PostLayout(props) {
           className="lg:col-start-1 lg:col-end-13"
         >
           <div className="flex gap-6">
+            <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
+              <TocBanner tableOfContents={props?.toc} />
+            </div>
             <div className="w-full">
               <TocTop className="lg:hidden" tableOfContents={props?.toc} />
               <MDXRemote {...props?.mdxSource} components={MDXComponents} />
-            </div>
-            <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
-              <TocBanner tableOfContents={props?.toc} />
             </div>
           </div>
         </motion.div>

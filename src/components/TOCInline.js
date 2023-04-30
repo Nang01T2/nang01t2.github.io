@@ -14,19 +14,6 @@ const TOCInline = ({
     ? new RegExp('^(' + exclude.join('|') + ')$', 'i')
     : new RegExp('^(' + exclude + ')$', 'i');
 
-  const tmpToc = [
-    { value: 'Title 1', url: '#title-1', depth: 1 },
-    { value: 'Title 2', url: '#title-2', depth: 2 },
-    { value: 'Title 3', url: '#title-3', depth: 3 },
-    { value: 'Title 4', url: '#title-4', depth: 4 },
-    { value: 'Title 5', url: '#title-5', depth: 5 },
-    { value: 'GitHub flavor', url: '#github-flavor', depth: 2 },
-    { value: 'Images', url: '#images', depth: 2 },
-    { value: 'Math', url: '#math', depth: 2 },
-    { value: 'Template', url: '#template', depth: 2 },
-    { value: 'Quick start', url: '#quick-start', depth: 3 },
-  ];
-
   const filteredToc = toc?.filter(
     (heading) =>
       heading.depth >= fromHeading &&

@@ -1,10 +1,3 @@
-const headerNavLinks = [
-  { href: "/", title: "Home" },
-  { href: "/blog", title: "Blog" },
-  { href: "/tags", title: "Tags" },
-  { href: "/projects", title: "Projects" },
-  { href: "/about", title: "About" },
-  { href: "/markdowntest", title: "MDX Page" },
-];
+const headerNavLinks = [{ href: "/snippets", title: "Snippets" }];
 
 export default headerNavLinks;

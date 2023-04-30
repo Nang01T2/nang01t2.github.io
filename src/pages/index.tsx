@@ -1,11 +1,10 @@
 import Container from "@/components/layouts/Container";
+import BouncingBall from "@/components/misc/BouncingBall";
 
 export default function Home() {
   return (
     <Container>
-      <div>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      </div>
+      <BouncingBall />
     </Container>
   );
 }
