@@ -1,9 +1,8 @@
 import { Dialog } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import headerNavLinks from "@/data/headerNavLinks";
-import DarkModeButton from "./DarkModeButton";
 import { useTheme } from "next-themes";
+import { siteConfig } from "@/data/siteConfig";
 
 export default function MobileNavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,11 +68,11 @@ export default function MobileNavBar() {
             </svg>
           </button>
           <ul className="space-y-6">
-            {headerNavLinks.map((link) => (
-              <li key={link.title}>
-                <Link href={link.href} passHref>
+            {siteConfig?.menus?.map((link) => (
+              <li key={link.label}>
+                <Link href={link.path} passHref>
                   <span className="hover:text-teal-400 dark:hover:text-teal-500">
-                    {link.title}
+                    {link.label}
                   </span>
                 </Link>
               </li>

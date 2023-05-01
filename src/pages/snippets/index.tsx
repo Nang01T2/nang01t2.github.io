@@ -11,7 +11,8 @@ import { ReducedPost } from "@/libs/types";
 import Pill from "@/components/common/Pill";
 import title from "title";
 import SnippetListItem from "@/components/SnippetListItem";
-import Hr from "@/components/common/Hr";
+import { PageSEO } from "@/components/SEO";
+import { siteConfig } from "@/data/siteConfig";
 
 type Snippet = {
   key: string;
@@ -33,8 +34,6 @@ export const getStaticProps: GetStaticProps = () => {
     ac[snippet.snippetName].push(snippet);
     return ac;
   }, {});
-
-  console.log("tagSnippets", tagSnippets);
 
   const snippetList = Object.keys(tagSnippets)
     .map<Snippet>((key) => ({
@@ -66,6 +65,7 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
 
   return (
     <Container className="flex flex-col justify-between">
+      <PageSEO title={`Snippets - ${siteConfig.title}`} url="/snippets" />
       <Title>Code Snippets</Title>
       <motion.div
         variants={staggerHalf}
@@ -107,22 +107,19 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
         <div className="mt-8 space-y-16">
           {filteredSnippetList.map(({ key, postList }) => {
             return (
-              <>
-                <motion.ul
-                  key={key}
-                  className="mt-4 grid grid-cols-2 gap-4"
-                  variants={staggerImmediate}
-                >
-                  <AnimatePresence mode="wait">
-                    {postList.map((post) => (
-                      <motion.li key={post.slug} variants={fadeInHalf}>
-                        <SnippetListItem post={post} />
-                      </motion.li>
-                    ))}
-                  </AnimatePresence>
-                </motion.ul>
-                {/* <Hr /> */}
-              </>
+              <motion.ul
+                key={key}
+                className="mt-4 grid grid-cols-2 gap-4"
+                variants={staggerImmediate}
+              >
+                <AnimatePresence mode="wait">
+                  {postList.map((post) => (
+                    <motion.li key={post.slug} variants={fadeInHalf}>
+                      <SnippetListItem post={post} />
+                    </motion.li>
+                  ))}
+                </AnimatePresence>
+              </motion.ul>
             );
           })}
         </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import headerNavLinks from "@/data/headerNavLinks";
+import { siteConfig } from "@/data/siteConfig";
 
 function NavItem({ href, text, ...props }) {
   const router = useRouter();
@@ -25,8 +25,8 @@ function NavItem({ href, text, ...props }) {
 export default function NavBar() {
   return (
     <nav className="hidden space-x-8 text-lg md:flex">
-      {headerNavLinks.map((link) => (
-        <NavItem key={link.title} href={link.href} text={link.title} />
+      {siteConfig?.menus?.map((link) => (
+        <NavItem key={link.label} href={link.path} text={link.label} />
       ))}
     </nav>
   );

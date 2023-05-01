@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { $ } from "@/libs/core";
 
-export default function ReadingProgressBar() {
+export default function ReadingProgressBar({ className = "" }) {
   const [width, setWidth] = useState(0);
 
   const scrollHeight = () => {
@@ -13,21 +14,19 @@ export default function ReadingProgressBar() {
   };
 
   useEffect(() => {
-    //const elmnt = document.getElementById("headernav");
-    //console.log("AAA", elmnt?.offsetHeight);
     window.addEventListener("scroll", scrollHeight);
     return () => window.removeEventListener("scroll", scrollHeight);
   }, []);
 
   return (
-    <div className="progressBar" style={{ width: `${width}%` }}>
+    <div className={$("progressBar", className)} style={{ width: `${width}%` }}>
       <style jsx>{`
         .progressBar {
           position: fixed;
           z-index: 50;
-          top: 72px;
+          top: 64px;
           left: 0px;
-          height: 6px;
+          height: 3px;
           border-radius: 0px 2px 0px 0px;
           background: linear-gradient(90deg, #ffdd00, #fbb034);
         }

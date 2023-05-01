@@ -6,7 +6,6 @@ import CopyLinkButton from "./common/CopyLinkButton";
 import IconButton from "./common/IconButton";
 import ChatIcon from "./icons/ChatIcon";
 import UpIcon from "./icons/UpIcon";
-import ThemeSwitch from "./DarkModeSwitch2";
 
 const useScroll = (tableOfContents) => {
   const [currentSectionSlug, setCurrentSectionSlug] = useState(undefined);
@@ -141,7 +140,6 @@ export default function TocBanner({
         >
           <ChatIcon width={20} />
         </IconButton>
-        {/* <ThemeSwitch className="hover:bg-mute" /> */}
       </div>
     </div>
   );

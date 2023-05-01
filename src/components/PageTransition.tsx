@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { ReactNode } from "react";
 
@@ -17,10 +17,11 @@ const variants = {
   },
 };
 
-export const PageTransition = ({ children }) => {
-  const prefersReducedMotion = useReducedMotion();
-
-  if (prefersReducedMotion) return <>{children}</>;
+export const PageTransition = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
   return (
     <motion.div initial="initial" animate="enter" variants={variants}>
       {children}

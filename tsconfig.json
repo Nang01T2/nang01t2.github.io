@@ -25,9 +25,6 @@
     "**/*.ts",
     "**/*.tsx",
     "src/pages/_app.js",
-    "src/components/PageTransition.js",
-    "src/components/common/AnchorLink.js",
-    "src/libs/formatHashLink.js",
     ".contentlayer/generated"
   ],
   "exclude": ["node_modules"]

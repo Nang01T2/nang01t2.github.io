@@ -14,25 +14,37 @@ import ReadingProgressBar from "@/components/ReadingProgressBar";
 import Container from "@/components/layouts/Container";
 import { MDXRemote } from "next-mdx-remote";
 import { MDXComponents } from "@/components/MDXComponents";
+import UnderConstruction from "@/components/UnderConstruction";
+import { PageSEO, BlogSEO } from "../SEO";
 
 export default function PostLayout(props) {
-  const {
-    category,
-    frontMatter,
-    mdxSource: content,
-    toc: tableOfContents,
-  } = props;
+  const { category, frontMatter, mdxSource, tableOfContents } = props;
   const headerTagTitle = frontMatter?.category;
   const headerTagSlug = `/${frontMatter?.slug?.split("/")?.at(0)}?key=${
     frontMatter?.category ?? "all"
   }`;
 
-  console.log("frontMatter", frontMatter);
+  //console.log("Post", props?.post);
+  //console.log("frontMatter", frontMatter);
+  if (frontMatter?.draft === true) {
+    return (
+      <Container className="flex flex-col justify-between">
+        <PageSEO title={`Under Construction - ${frontMatter.title}`} />
+        <UnderConstruction />
+      </Container>
+    );
+  }
+
   return (
     <Container className="flex flex-col justify-between">
-      {/* <BlogSEO {...post} url={post.slug} summary={post.description} images={[]} />
-       */}
-      {/* <ReadingProgressBar /> */}
+      <BlogSEO
+        {...frontMatter}
+        url={frontMatter.slug}
+        summary={frontMatter.description}
+        images={[]}
+      />
+
+      <ReadingProgressBar />
       <div className="max-w-full prose prose-lg dark:prose-dark">
         <motion.section
           variants={staggerHalf}
@@ -86,7 +98,7 @@ export default function PostLayout(props) {
                   className="lg:hidden"
                   tableOfContents={tableOfContents}
                 />
-                <MDXRemote {...content} components={MDXComponents} />
+                <MDXRemote {...mdxSource} components={MDXComponents} />
               </div>
               {tableOfContents?.length > 0 && (
                 <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
