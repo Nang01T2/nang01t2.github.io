@@ -5,7 +5,7 @@ import { allSnippets } from "@/data/dataset";
 
 export async function getStaticPaths() {
   const blogFiles = getFiles("snippets");
-  const paths = blogFiles.map((p) => {
+  const paths = blogFiles?.map((p) => {
     return {
       params: {
         slugs: formatSlug(p).split("/"),
