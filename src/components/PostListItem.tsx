@@ -30,7 +30,7 @@ export default function PostListItem({ post }: { post: ReducedPost }) {
             Icon={CalenderIcon}
             text={dayjs(post.date).format("YY.MM.DD")}
           />
-          <IconText Icon={ClockIcon} text={`${post.readingMinutes}분`} />
+          <IconText Icon={ClockIcon} text={`${post.readingMinutes} min read`} />
         </div>
       </div>
     </div>
