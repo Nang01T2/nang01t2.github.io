@@ -7,10 +7,11 @@ import readingTime from "reading-time";
 
 import remarkMath from "remark-math";
 import remarkFrontmatter from "remark-frontmatter";
-import remarkExtractFrontmatter from "@/libs/remark-extract-frontmatter";
+//import remarkExtractFrontmatter from "@/libs/remark-extract-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkTocHeadings from "@/libs/remark-toc-headings";
 import remarkImgToJsx from "@/libs/remark-img-to-jsx";
+import remarkBreaks from "remark-breaks";
 
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
@@ -169,9 +170,10 @@ export async function getFileBySlug(type, id) {
     mdxOptions: {
       remarkPlugins: [
         remarkFrontmatter,
-        remarkExtractFrontmatter,
+        //remarkExtractFrontmatter,
         remarkMath,
         remarkGfm,
+        remarkBreaks,
         [remarkTocHeadings, { exportRef: toc }],
         remarkImgToJsx,
       ],
@@ -192,7 +194,7 @@ export async function getFileBySlug(type, id) {
       ],
     },
     // Indicates whether or not to parse the frontmatter from the mdx source
-    parseFrontmatter: true,
+    parseFrontmatter: false,
   });
   const { frontmatter } = mdxSource;
   const fileName = fs.existsSync(mdxPath) ? `${id}.mdx` : `${id}.md`;

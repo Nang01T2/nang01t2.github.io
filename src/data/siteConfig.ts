@@ -2,7 +2,7 @@ import { DefaultSeoProps } from "next-seo";
 
 export const siteConfig = {
   url: "https://nang01t2.github.io",
-  title: "Nang Nguyen blog",
+  title: "Nang Nguyen",
   description: "Github Blog Testing",
   copyright: "Nang Nguyen © All rights reserved.",
   since: 2023,

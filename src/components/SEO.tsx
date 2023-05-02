@@ -6,7 +6,7 @@ const getTitle = (title?: string) => {
   if (!title) return siteConfig.title;
   if (title.length > 10) return title;
 
-  return `${title} - Nang Nguyen Blog`;
+  return `${title} - Nang Nguyen`;
 };
 
 const getRelativeUrl = (url?: string) => {

@@ -4,9 +4,11 @@ import { siteConfig } from "@/data/siteConfig";
 
 function NavItem({ href, text, ...props }) {
   const router = useRouter();
-  //const isActive = router.asPath.startsWith(href ?? "/");
-  const isActive = router.asPath === href;
-
+  const isActive =
+    href !== "/"
+      ? router.asPath.startsWith(href ?? "/")
+      : router.asPath === href;
+  //const isActive = router.asPath === href;
   return (
     <Link {...props} href={href} passHref>
       <span

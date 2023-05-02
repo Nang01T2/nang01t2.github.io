@@ -24,3 +24,9 @@ export type SubSection = {
 export type Section = SubSection & {
   subSections: SubSection[];
 };
+
+export enum ButtonType {
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+  TERTIARY = "tertiary",
+}

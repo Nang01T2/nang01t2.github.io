@@ -2,6 +2,7 @@ import React from "react";
 import siteMetadata from "@/data/siteMetadata";
 import Link from "next/link";
 import Hr from "../common/Hr";
+import Clock from "../Clock";
 
 const navigation = {
   general: [
@@ -224,9 +225,13 @@ export default function Footer() {
             </div>
           </div>
         </div> */}
+
         <div className="flex items-center justify-between mt-5">
           <div className="flex items-center order-2 space-x-6">
-            {navigation.social.map((item) => (
+            <div>
+              <Clock />
+            </div>
+            {/* {navigation.social.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
@@ -235,7 +240,7 @@ export default function Footer() {
                 <span className="sr-only">{item.name}</span>
                 <item.icon aria-hidden="true" />
               </a>
-            ))}
+            ))} */}
           </div>
           <p className="order-1 text-base">
             &copy; {new Date().getFullYear()} {siteMetadata.author.name}

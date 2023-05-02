@@ -8,6 +8,7 @@ import CalenderIcon from "@/components/icons/CalenderIcon";
 import ClockIcon from "@/components/icons/ClockIcon";
 import IconText from "@/components/common/IconText";
 import Title from "@/components/common/Title";
+import Tag from "@/components/common/Tag";
 import TocTop from "@/components/TocTop";
 import TocBanner from "@/components/TocBanner";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
@@ -18,18 +19,17 @@ import UnderConstruction from "@/components/UnderConstruction";
 import { PageSEO, BlogSEO } from "../SEO";
 
 export default function PostLayout(props) {
-  const { category, frontMatter, mdxSource, tableOfContents } = props;
-  const headerTagTitle = frontMatter?.category;
-  const headerTagSlug = `/${frontMatter?.slug?.split("/")?.at(0)}?key=${
-    frontMatter?.category ?? "all"
-  }`;
+  const { post, series, mdxSource, tableOfContents } = props;
+  const headerTagTitle = series?.title ?? post.snippetName;
+  const headerTagSlug =
+    series?.slug ?? `/snippets?key=${post.snippetName ?? "all"}`;
 
-  //console.log("Post", props?.post);
-  //console.log("frontMatter", frontMatter);
-  if (frontMatter?.draft === true) {
+  //console.log("series", props?.series);
+  //console.log("post", post);
+  if (post?.draft === true) {
     return (
       <Container className="flex flex-col justify-between">
-        <PageSEO title={`Under Construction - ${frontMatter.title}`} />
+        <PageSEO title={`Under Construction - ${post.title}`} />
         <UnderConstruction />
       </Container>
     );
@@ -38,9 +38,9 @@ export default function PostLayout(props) {
   return (
     <Container className="flex flex-col justify-between">
       <BlogSEO
-        {...frontMatter}
-        url={frontMatter.slug}
-        summary={frontMatter.description}
+        {...post}
+        url={post.slug}
+        summary={post.description}
         images={[]}
       />
 
@@ -58,11 +58,11 @@ export default function PostLayout(props) {
             <div className="space-y-16">
               <div>
                 <Title className="mx-auto mb-4 max-w-3xl text-center">
-                  {frontMatter?.title}
+                  {post?.title}
                 </Title>
                 {headerTagTitle && (
                   <div className="mt-2 flex justify-center gap-1">
-                    {frontMatter.category && <span>{category}: </span>}
+                    {post.snippetName && <span>snippet: </span>}
                     <Link href={headerTagSlug}>
                       <span className="text-sm font-medium sm:text-base">
                         {headerTagTitle}
@@ -74,14 +74,19 @@ export default function PostLayout(props) {
                   <div className="flex items-center justify-center mb-2 space-x-2 text-base">
                     <IconText
                       Icon={CalenderIcon}
-                      text={dayjs(frontMatter.date).format("YYYY.MM.DD")}
+                      text={dayjs(post.date).format("YYYY.MM.DD")}
                     />
                     <IconText
                       Icon={ClockIcon}
-                      text={frontMatter?.readingTime?.text}
+                      text={`${post?.readingMinutes} min read`}
                     />
                   </div>
                 </div>
+                {/* <div className="flex items-center justify-center mt-12  gap-2">
+                  {frontMatter?.tags?.map((tag) => (
+                    <Tag key={tag} tag={tag} />
+                  ))}
+                </div> */}
                 <Hr className="mt-4" />
               </div>
             </div>
@@ -90,7 +95,7 @@ export default function PostLayout(props) {
           {/* Post Content */}
           <motion.div
             variants={fadeInHalf}
-            className="lg:col-start-1 lg:col-end-13 "
+            className="lg:col-start-1 lg:col-end-13"
           >
             <div className="flex gap-6">
               <div className="w-full">
@@ -98,6 +103,7 @@ export default function PostLayout(props) {
                   className="lg:hidden"
                   tableOfContents={tableOfContents}
                 />
+
                 <MDXRemote {...mdxSource} components={MDXComponents} />
               </div>
               {tableOfContents?.length > 0 && (
@@ -105,6 +111,18 @@ export default function PostLayout(props) {
                   <TocBanner tableOfContents={tableOfContents} />
                 </div>
               )}
+            </div>
+          </motion.div>
+
+          {/* Post Footer */}
+          <motion.div
+            variants={fadeInHalf}
+            className="col-span-12 mt-12 space-y-8 lg:mt-24"
+          >
+            <div className="flex gap-2">
+              {post?.tags?.map((tag) => (
+                <Tag key={tag} tag={tag} />
+              ))}
             </div>
           </motion.div>
         </motion.section>

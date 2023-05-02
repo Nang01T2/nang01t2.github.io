@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import 'syntax-highlighting.css';
+/* @import 'intellij-prism.css'; */
 
 .wrapper {
   display: grid;

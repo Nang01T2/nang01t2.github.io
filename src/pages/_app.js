@@ -12,7 +12,6 @@ import { Toaster } from "react-hot-toast";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXComponents } from "@/components/MDXComponents";
 import { seoConfig } from "@/data/siteConfig";
-import siteMetadata from "@/data/siteMetadata";
 import "dayjs/locale/en";
 
 import dayjs from "dayjs";
@@ -21,7 +20,7 @@ dayjs.locale("en");
 
 export default function App({ Component, pageProps }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
+    <ThemeProvider attribute="class">
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
