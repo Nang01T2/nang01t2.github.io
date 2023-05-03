@@ -1,11 +1,13 @@
 import createMDX from "@next/mdx";
 import { withContentlayer } from "next-contentlayer";
-
 import mdxOptions from "./src/libs/mdxOptions.mjs";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
-  options: mdxOptions,
+  options: {
+    ...mdxOptions,
+    providerImportSource: "@mdx-js/react",
+  },
 });
 
 /** @type {import('next').NextConfig} */
@@ -22,6 +24,10 @@ const nextConfig = {
     unoptimized: true,
     //loader: "imgix",
     //path: "https://images.unsplash.com/",
+  },
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "vi"],
   },
   webpack: (config) => {
     // https://github.com/contentlayerdev/contentlayer/issues/313#issuecomment-1279678289

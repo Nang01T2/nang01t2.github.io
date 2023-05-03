@@ -10,8 +10,8 @@ import mdxOptions from "./mdxOptions.mjs";
 const root = process.cwd();
 
 // current 'posts' directory
-const dataFolder = "posts";
-const postsDirectory = path.join(root, dataFolder);
+const dataFolder = "content";
+const postsDirectory = path.join(root, dataFolder, "posts");
 const mdx_file_extention = ".mdx";
 
 function getAllFilesInDirectory() {
@@ -128,9 +128,9 @@ export function getPostMetadata(id) {
   return postMetadata;
 }
 
-export async function getFileBySlug(type, id) {
-  const mdxPath = path.join(postsDirectory, type, `${id}.mdx`);
-  const mdPath = path.join(postsDirectory, type, `${id}.md`);
+export async function getFileBySlug(type, locale, id) {
+  const mdxPath = path.join(postsDirectory, locale, type, `${id}.mdx`);
+  const mdPath = path.join(postsDirectory, locale, type, `${id}.md`);
 
   const fullPath = fs.existsSync(mdxPath) ? mdxPath : mdPath;
   //console.log('fullPath', fullPath);

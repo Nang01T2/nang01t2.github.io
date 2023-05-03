@@ -3,25 +3,13 @@ import {
   defineDocumentType,
   FieldDefs,
   makeSource,
+  RawDocumentData,
 } from "contentlayer/source-files";
+
+import mdxOptions from "./src/libs/mdxOptions.mjs";
 
 import { getToc } from "./src/libs/getToc";
 import readingTime from "reading-time";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeExternalLinks from "rehype-external-links";
-import rehypePrism from "rehype-prism-plus";
-import rehypeSlug from "rehype-slug";
-import remarkBreaks from "remark-breaks";
-import remarkGfm from "remark-gfm";
-
-import rehypeCodeWrap from "./src/libs/rehypeCodeWrap";
-
-const Tag = defineNestedType(() => ({
-  name: "Tag",
-  fields: {
-    title: { type: "string", required: true },
-  },
-}));
 
 const fields: FieldDefs = {
   title: { type: "string", required: true },
@@ -33,15 +21,29 @@ const fields: FieldDefs = {
   icon: { type: "string" },
 };
 
+function resolveSlug(raw: RawDocumentData) {
+  const [, locale, ...rest] = raw.flattenedPath.split("/");
+  return { locale, slug: rest.join("/") };
+}
+
 export const Post = defineDocumentType(() => ({
   name: "Post",
-  filePathPattern: `**/*.mdx`,
+  filePathPattern: `posts/**/*+(.md|.mdx)`,
   contentType: "mdx",
   fields,
   computedFields: {
     slug: {
       type: "string",
+      resolve: (post) => `/${resolveSlug(post._raw).slug}`,
+    },
+    url: {
+      type: "string",
       resolve: (post) => `/${post._raw.flattenedPath}`,
+    },
+    locale: {
+      type: "enum",
+      options: ["en", "vi"],
+      resolve: (post) => resolveSlug(post._raw).locale,
     },
     readingMinutes: {
       type: "string",
@@ -59,30 +61,10 @@ export const Post = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-  contentDirPath: "posts",
+  contentDirPath: "content",
   documentTypes: [Post],
   mdx: {
-    remarkPlugins: [remarkGfm, remarkBreaks],
-    rehypePlugins: [
-      rehypeSlug,
-      rehypeCodeWrap,
-      rehypePrism,
-      [
-        rehypeAutolinkHeadings,
-        {
-          properties: {
-            className: ["anchor"],
-            ariaLabel: "anchor",
-          },
-        },
-      ],
-      [
-        rehypeExternalLinks,
-        {
-          target: "_blank",
-          rel: ["noopener noreferrer"],
-        },
-      ],
-    ],
+    remarkPlugins: mdxOptions.remarkPlugins,
+    rehypePlugins: mdxOptions.remarkPlugins,
   },
 });

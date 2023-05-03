@@ -29,9 +29,8 @@ const rehypePrettyCodeOptions = {
   },
 };
 
-/** @type {import('@mdx-js/mdx').CompileOptions} */
+
 const mdxOptions = {
-  providerImportSource: "@mdx-js/react",
   remarkPlugins: [
     remarkFrontmatter,
     remarkGfm,

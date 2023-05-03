@@ -19,12 +19,15 @@ import CollectionItem from "@/components/CollectionItem";
 import Title from "@/components/common/Title";
 import SubTitle from "@/components/common/SubTitle";
 import { allSeries, reducedAllBlogPosts } from "@/data/dataset";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
-export const getStaticProps = () => {
+export const getStaticProps = async ({ locale }) => {
   return {
     props: {
-      postList: reducedAllBlogPosts,
+      postList: reducedAllBlogPosts.filter((x) => x.locale === locale),
       seriesList: allSeries,
+      ...(await serverSideTranslations(locale, ["common", "blog"])),
     },
   };
 };
@@ -33,7 +36,9 @@ export default function BlogPage({ postList, seriesList }) {
   const { searchValue, searchHandler } = useSearch();
   const [filteredBlogPosts, setFilteredBlogPosts] = useState([]);
   const [filteredSeries, setFilteredSeries] = useState([]);
+  const { t } = useTranslation("blog");
 
+  console.log("postList", postList);
   useEffect(() => {
     setFilteredSeries(
       seriesList.filter((series) =>
@@ -86,7 +91,9 @@ export default function BlogPage({ postList, seriesList }) {
           className="mt-16 mb-4 flex items-end gap-2"
           variants={fadeInHalf}
         >
-          <SubTitle>{!searchValue ? "All Posts" : "Filtered Posts"}</SubTitle>
+          <SubTitle>
+            {!searchValue ? t("all-posts") : t("filtered-posts")}
+          </SubTitle>
           <span className="font-bold">({filteredBlogPosts.length})</span>
         </motion.div>
 

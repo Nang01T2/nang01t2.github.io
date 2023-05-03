@@ -1,0 +1,67 @@
+---
+title: '(React) Lodash Debounce'
+description: ''
+icon: ''
+image: ''
+tags:
+  - react
+  - javascript
+  - typescript
+  - debounce
+draft: true
+date: 2023-04-30 21:31:23
+---
+
+`javascript`
+
+```shell
+yarn add lodash.debounce
+```
+
+```jsx
+const App = () => {
+  const [searchValue, setSearchValue] = useState('');
+
+  const searchHandler = useCallback(
+    sdebounce((e) => {
+      setSearchValue(e.target.value);
+    }, 300),
+    [],
+  );
+
+  return (
+    <div>
+      <div>{searchValue}</div>
+      <input type="text" onChange={searchHandler} />
+    </div>
+  );
+};
+```
+
+---
+
+`typescript`
+
+```shell
+yarn add -D @types/lodash.debounce
+```
+
+```ts:useSearch.ts
+import debounce from 'lodash.debounce';
+import React, { useCallback, useState } from 'react';
+
+export default function useSearch(callback?: (value: string) => void, wait = 300) {
+  const [searchValue, setSearchValue] = useState('');
+
+  const searchHandler = useCallback(
+    debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      callback?.(value);
+      setSearchValue(value);
+    }, wait),
+    [],
+  );
+
+  return { searchValue, searchHandler };
+}
+```

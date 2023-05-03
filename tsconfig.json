@@ -25,7 +25,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".contentlayer/generated",
-    "src/pages/blog/[...slugs].js"
+    "src/pages/blog/[...slugs].js",
+    "src/components/LocaleSwitch.js"
   ],
   "exclude": ["node_modules"]
 }

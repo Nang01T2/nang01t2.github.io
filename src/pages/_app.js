@@ -6,8 +6,7 @@ import "@/styles/code-highlighting.scss";
 import Head from "next/head";
 import { ThemeProvider } from "next-themes";
 import { DefaultSeo } from "next-seo";
-//import Fonts from "@/components/Fonts";
-//import { $, isDev } from "@/libs/core";
+import { appWithTranslation } from "next-i18next";
 import { Toaster } from "react-hot-toast";
 import { MDXProvider } from "@mdx-js/react";
 //import { MDXComponents3 } from "@/components/MDXComponents3";
@@ -19,7 +18,7 @@ import dayjs from "dayjs";
 
 dayjs.locale("en");
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <ThemeProvider attribute="class">
       <Head>
@@ -38,3 +37,5 @@ export default function App({ Component, pageProps }) {
     </ThemeProvider>
   );
 }
+
+export default appWithTranslation(App);

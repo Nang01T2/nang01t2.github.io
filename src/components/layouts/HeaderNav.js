@@ -2,6 +2,7 @@ import Logo from "../Logo";
 import NavBar from "../NavBar";
 import MobileNavBar from "../MobileNavBar";
 import DarkModeButton from "../DarkModeButton";
+import LocaleSwitch from "../LocaleSwitch";
 
 export default function HeaderNav2() {
   return (
@@ -12,6 +13,7 @@ export default function HeaderNav2() {
       <div className="flex items-center justify-between max-w-6xl px-4 py-2 mx-auto sm:px-6 md:space-x-10">
         <Logo />
         <NavBar />
+        <LocaleSwitch />
         <DarkModeButton />
 
         {/* Conditional rendering here to ensure that dialog portal isn't removed on route change. */}

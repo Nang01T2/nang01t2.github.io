@@ -23,6 +23,8 @@ export type Post = {
   /** MDX file body */
   body: MDX
   slug: string
+  url: string
+  locale: enum
   readingMinutes: string
   wordCount: number
   toc: list
