@@ -10,7 +10,8 @@ import { DefaultSeo } from "next-seo";
 //import { $, isDev } from "@/libs/core";
 import { Toaster } from "react-hot-toast";
 import { MDXProvider } from "@mdx-js/react";
-import { MDXComponents } from "@/components/MDXComponents";
+//import { MDXComponents3 } from "@/components/MDXComponents3";
+import { mdxComponents } from "@/components/MdxComponents";
 import { seoConfig } from "@/data/siteConfig";
 import "dayjs/locale/en";
 
@@ -25,7 +26,7 @@ export default function App({ Component, pageProps }) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       <DefaultSeo {...seoConfig} />
-      <MDXProvider components={MDXComponents}>
+      <MDXProvider components={mdxComponents}>
         <Component {...pageProps} />
         <Toaster
           toastOptions={{

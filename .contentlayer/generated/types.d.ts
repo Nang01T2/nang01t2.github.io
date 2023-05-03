@@ -25,6 +25,7 @@ export type Post = {
   slug: string
   readingMinutes: string
   wordCount: number
+  toc: list
 }  
 
 /** Nested types */

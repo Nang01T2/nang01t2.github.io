@@ -4,32 +4,17 @@ import {
   FieldDefs,
   makeSource,
 } from "contentlayer/source-files";
+
+import { getToc } from "./src/libs/getToc";
 import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-//import rehypePrettyCode from "rehype-pretty-code";
-//import rehypeExternalLinks from 'rehype-external-links';
+import rehypeExternalLinks from "rehype-external-links";
 import rehypePrism from "rehype-prism-plus";
 import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
 import rehypeCodeWrap from "./src/libs/rehypeCodeWrap";
-
-// const rehypePrettyCodeOptions = {
-//   theme: "one-dark-pro",
-//   keepBackground: true,
-//   onVisitLine(node) {
-//     if (node.children.length === 0) {
-//       node.children = [{ type: "text", value: " " }];
-//     }
-//   },
-//   onVisitHighlightedLine(node) {
-//     node.properties.className.push("highlighted");
-//   },
-//   onVisitHighlightedWord(node) {
-//     node.properties.className = ["word"];
-//   },
-// };
 
 const Tag = defineNestedType(() => ({
   name: "Tag",
@@ -66,6 +51,10 @@ export const Post = defineDocumentType(() => ({
       type: "number",
       resolve: (post) => post.body.raw.split(/\s+/gu).length,
     },
+    toc: {
+      type: "list",
+      resolve: (post) => getToc(post.body.raw),
+    },
   },
 }));
 
@@ -87,14 +76,13 @@ export default makeSource({
           },
         },
       ],
-      //[rehypePrettyCode, rehypePrettyCodeOptions],
-      // [
-      //   rehypeExternalLinks,
-      //   {
-      //     target: '_blank',
-      //     rel: ['noopener noreferrer'],
-      //   },
-      // ],
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+          rel: ["noopener noreferrer"],
+        },
+      ],
     ],
   },
 });

@@ -24,9 +24,7 @@ export async function getStaticProps({ params }) {
     : null;
   return {
     props: {
-      tableOfContents: postData.toc,
       mdxSource: postData.content,
-      //frontMatter: postData.metadata,
       post,
       series,
     },

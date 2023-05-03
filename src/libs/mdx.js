@@ -5,35 +5,7 @@ import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import readingTime from "reading-time";
 
-import remarkMath from "remark-math";
-import remarkFrontmatter from "remark-frontmatter";
-//import remarkExtractFrontmatter from "@/libs/remark-extract-frontmatter";
-import remarkGfm from "remark-gfm";
-import remarkTocHeadings from "@/libs/remark-toc-headings";
-import remarkImgToJsx from "@/libs/remark-img-to-jsx";
-import remarkBreaks from "remark-breaks";
-
-import rehypeKatex from "rehype-katex";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypePresetMinify from "rehype-preset-minify";
-
-const rehypePrettyCodeOptions = {
-  theme: "one-dark-pro",
-  keepBackground: true,
-  onVisitLine(node) {
-    if (node.children.length === 0) {
-      node.children = [{ type: "text", value: " " }];
-    }
-  },
-  onVisitHighlightedLine(node) {
-    node.properties.className.push("highlighted");
-  },
-  onVisitHighlightedWord(node) {
-    node.properties.className = ["word"];
-  },
-};
+import mdxOptions from "./mdxOptions.mjs";
 
 const root = process.cwd();
 
@@ -165,50 +137,13 @@ export async function getFileBySlug(type, id) {
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
-  let toc = [];
   const mdxSource = await serialize(fileContents, {
-    mdxOptions: {
-      remarkPlugins: [
-        remarkFrontmatter,
-        //remarkExtractFrontmatter,
-        remarkMath,
-        remarkGfm,
-        remarkBreaks,
-        [remarkTocHeadings, { exportRef: toc }],
-        remarkImgToJsx,
-      ],
-      rehypePlugins: [
-        rehypeKatex,
-        rehypeSlug,
-        [
-          rehypeAutolinkHeadings,
-          {
-            properties: {
-              className: ["anchor"],
-              ariaLabel: "anchor",
-            },
-          },
-        ],
-        [rehypePrettyCode, rehypePrettyCodeOptions],
-        rehypePresetMinify,
-      ],
-    },
+    mdxOptions: mdxOptions,
     // Indicates whether or not to parse the frontmatter from the mdx source
     parseFrontmatter: false,
   });
-  const { frontmatter } = mdxSource;
-  const fileName = fs.existsSync(mdxPath) ? `${id}.mdx` : `${id}.md`;
   return {
-    toc,
     content: mdxSource,
-    metadata: {
-      ...frontmatter,
-      fileName,
-      readingTime: readingTime(fileContents),
-      slug: [type, id].join("/") || null,
-      date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
-      category: fileName?.split("/")?.at(0) ?? null,
-    },
   };
 }
 

@@ -30,3 +30,9 @@ export enum ButtonType {
   SECONDARY = "secondary",
   TERTIARY = "tertiary",
 }
+
+export type Toc = {
+  value: string;
+  url: string;
+  depth: number;
+}[];

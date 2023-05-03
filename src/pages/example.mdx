@@ -1,10 +1,4 @@
----
-title: Markdown Template Example
-description: 'Templates Using Markdown Syntax'
-tags:
-  - markdown
-date: 2023-04-30 21:12:24
----
+import Container from '../components/layouts/Container.tsx';
 
 ## h2 Heading
 
@@ -18,6 +12,17 @@ date: 2023-04-30 21:12:24
 
 line break with '&nbsp;&nbsp;&nbsp;'  
 line break with `<br />` <br />
+
+---
+
+✨ [**react-hot-toast**](https://github.com/timolins/react-hot-toast)
+
+🔥 Hot by default
+🔩 Easily Customizable
+⏳ Promise API - Automatic loader from a promise
+🕊 Lightweight - less than 5kb including styles
+✅ Accessible
+🤯 Headless Hooks
 
 ---
 
@@ -123,3 +128,7 @@ Autoconverted link https://github.com/lavinoys
 HTML `<Img />` tag
 
 <img src="https://octodex.github.com/images/stormtroopocat.jpg" alt="Stormtroopocat" width={300} />
+
+export default ({ children }) => (
+  <Container className="flex flex-col justify-between"><div className="max-w-full prose prose-lg dark:prose-dark">{children}</div></Container>
+);

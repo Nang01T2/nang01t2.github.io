@@ -38,6 +38,10 @@ export const siteConfig = {
       label: "Archives",
       path: "/archives",
     },
+    // {
+    //   label: "Test",
+    //   path: "/example",
+    // },
   ],
 };
 

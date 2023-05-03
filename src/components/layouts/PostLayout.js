@@ -14,12 +14,14 @@ import TocBanner from "@/components/TocBanner";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
 import Container from "@/components/layouts/Container";
 import { MDXRemote } from "next-mdx-remote";
-import { MDXComponents } from "@/components/MDXComponents";
+import TableOfContents from "@/components/TableOfContents";
+import { mdxComponents } from "@/components/MdxComponents";
 import UnderConstruction from "@/components/UnderConstruction";
 import { PageSEO, BlogSEO } from "../SEO";
+//import MdxRenderer from "@/components/MdxRenderer";
 
 export default function PostLayout(props) {
-  const { post, series, mdxSource, tableOfContents } = props;
+  const { post, series, mdxSource } = props;
   const headerTagTitle = series?.title ?? post.snippetName;
   const headerTagSlug =
     series?.slug ?? `/snippets?key=${post.snippetName ?? "all"}`;
@@ -99,16 +101,15 @@ export default function PostLayout(props) {
           >
             <div className="flex gap-6">
               <div className="w-full">
-                <TocTop
-                  className="lg:hidden"
-                  tableOfContents={tableOfContents}
-                />
+                <TableOfContents className="lg:hidden" toc={post?.toc} />
 
-                <MDXRemote {...mdxSource} components={MDXComponents} />
+                {/* <TocTop className="lg:hidden" tableOfContents={post?.toc} /> */}
+
+                <MDXRemote {...mdxSource} components={mdxComponents} />
               </div>
-              {tableOfContents?.length > 0 && (
+              {post?.toc?.length > 0 && (
                 <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
-                  <TocBanner tableOfContents={tableOfContents} />
+                  <TocBanner tableOfContents={post?.toc} />
                 </div>
               )}
             </div>
