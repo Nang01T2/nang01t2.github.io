@@ -1,29 +1,22 @@
 import React from "react";
-import { formatSlug, getFiles, getFileBySlug } from "@/libs/mdx";
+import { getFileBySlug } from "@/libs/mdx";
 import PostLayout from "@/components/layouts/PostLayout";
 import { allSnippets } from "@/data/dataset";
 
-export async function getStaticPaths() {
-  const blogFiles = getFiles("snippets");
-  const paths = blogFiles?.map((p) => {
-    return {
-      params: {
-        slugs: formatSlug(p).split("/"),
-      },
-    };
-  });
-
+export async function getStaticPaths({ locales }) {
+  const paths = allSnippets.map((post) => `/${post.locale}${post.slug}`);
   return {
     paths,
     fallback: false,
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ locale, params }) {
   const { slugs } = params;
-  const postData = await getFileBySlug("snippets", slugs?.join("/"));
+
+  const postData = await getFileBySlug("snippets", locale, slugs?.join("/"));
   const slug = `/snippets/${[...slugs].join("/")}`;
-  const post = allSnippets.find((v) => v.slug === slug);
+  const post = allSnippets.find((v) => v.slug === slug && v.locale === locale);
 
   return {
     props: {

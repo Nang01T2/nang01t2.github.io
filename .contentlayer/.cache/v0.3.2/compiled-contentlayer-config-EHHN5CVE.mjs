@@ -13,37 +13,6 @@ import rehypeSlug from "rehype-slug";
 import fs from "fs";
 import sizeOf from "image-size";
 import { visit } from "unist-util-visit";
-function remarkImgToJsx() {
-  return (tree) => {
-    visit(
-      tree,
-      // only visit p tags that contain an img element
-      (node) => node.type === "paragraph" && node.children.some((n) => n.type === "image"),
-      (node) => {
-        const imageNode = node.children.find((n) => n.type === "image");
-        if (fs.existsSync(`${process.cwd()}/public${imageNode.url}`)) {
-          const dimensions = sizeOf(`${process.cwd()}/public${imageNode.url}`);
-          imageNode.type = "mdxJsxFlowElement", imageNode.name = "Image", imageNode.attributes = [
-            { type: "mdxJsxAttribute", name: "alt", value: imageNode.alt },
-            { type: "mdxJsxAttribute", name: "src", value: imageNode.url },
-            {
-              type: "mdxJsxAttribute",
-              name: "width",
-              value: dimensions.width
-            },
-            {
-              type: "mdxJsxAttribute",
-              name: "height",
-              value: dimensions.height
-            }
-          ];
-          node.type = "div";
-          node.children = [imageNode];
-        }
-      }
-    );
-  };
-}
 
 // src/libs/mdxOptions.mjs
 import remarkFrontmatter from "remark-frontmatter";
@@ -72,10 +41,10 @@ var mdxOptions = {
     remarkGfm,
     remarkBreaks,
     //remarkMdxCodeMeta,
-    remarkDirective,
+    remarkDirective
     //remarkAdmonitions,
     //remarkCodeTitles,
-    remarkImgToJsx
+    //remarkImgToJsx,
   ],
   rehypePlugins: [
     rehypeExternalLinks,
@@ -180,4 +149,4 @@ export {
   Post,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-HCEOAX4J.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-EHHN5CVE.mjs.map

@@ -39,7 +39,7 @@ const mdxOptions = {
     remarkDirective,
     //remarkAdmonitions,
     //remarkCodeTitles,
-    remarkImgToJsx,
+    //remarkImgToJsx,
   ],
   rehypePlugins: [
     rehypeExternalLinks,

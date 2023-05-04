@@ -38,7 +38,7 @@ export default function BlogPage({ postList, seriesList }) {
   const [filteredSeries, setFilteredSeries] = useState([]);
   const { t } = useTranslation("blog");
 
-  console.log("postList", postList);
+  //console.log("postList", postList);
   useEffect(() => {
     setFilteredSeries(
       seriesList.filter((series) =>
@@ -50,7 +50,11 @@ export default function BlogPage({ postList, seriesList }) {
         post.title.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
-  }, [searchValue]);
+  }, [searchValue, postList]);
+
+  useEffect(() => {
+    console.log("postList", postList);
+  }, [postList]);
 
   return (
     <Container className="flex flex-col justify-between">

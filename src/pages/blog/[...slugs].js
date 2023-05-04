@@ -18,7 +18,7 @@ export async function getStaticProps({ locale, params }) {
   const postData = await getFileBySlug("blog", locale, slugs?.join("/"));
   const slug = `/blog/${[...slugs].join("/")}`;
 
-  const post = allBlogPosts.find((v) => v.slug === slug);
+  const post = allBlogPosts.find((v) => v.slug === slug && v.locale === locale);
   const series = post?.seriesName
     ? allSeries.find((series) =>
         series.slug.startsWith(`/blog/${post.seriesName}`)

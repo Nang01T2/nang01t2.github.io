@@ -19,21 +19,23 @@ type Snippet = {
   postList: ReducedPost[];
 };
 
-export const getStaticProps: GetStaticProps = () => {
-  const tagSnippets = reducedAllSnippets.reduce<{
-    [key: string]: ReducedPost[];
-  }>((ac, snippet) => {
-    if (!snippet.snippetName) {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const tagSnippets = reducedAllSnippets
+    ?.filter((x) => x.locale === locale)
+    ?.reduce<{
+      [key: string]: ReducedPost[];
+    }>((ac, snippet) => {
+      if (!snippet.snippetName) {
+        return ac;
+      }
+
+      if (!ac[snippet.snippetName]) {
+        ac[snippet.snippetName] = [];
+      }
+
+      ac[snippet.snippetName].push(snippet);
       return ac;
-    }
-
-    if (!ac[snippet.snippetName]) {
-      ac[snippet.snippetName] = [];
-    }
-
-    ac[snippet.snippetName].push(snippet);
-    return ac;
-  }, {});
+    }, {});
 
   const snippetList = Object.keys(tagSnippets)
     .map<Snippet>((key) => ({
@@ -50,7 +52,6 @@ export const getStaticProps: GetStaticProps = () => {
 export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
   const router = useRouter();
   const selectedKey = router.query?.key;
-
   const isAll = !selectedKey || selectedKey === "all";
   const allSnippetsCnt = snippetList.reduce(
     (ac, snippet) => ac + snippet.postList.length,
