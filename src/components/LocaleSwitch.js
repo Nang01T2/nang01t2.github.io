@@ -11,14 +11,18 @@ export default function LocaleSwitch() {
   const { locale: currentLocale, asPath } = useRouter();
 
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu
+      as="div"
+      className="relative inline-block text-left dark:bg-midnight dark:text-gray-300 "
+    >
       <div>
         <Menu.Button className="">
           {({ open }) => (
             <div
               className={$(
-                "inline-flex w-full items-center justify-center gap-2 rounded-md border px-2 py-1 text-sm font-semibold hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
-                open && "bg-gray-100"
+                "inline-flex w-full items-center justify-center gap-2 rounded-md border px-2 py-1 text-sm font-semibold hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+                open &&
+                  "bg-gray-100 dark:bg-gray-600 dark:hover:bg-gray-600 dark:hover:text-gray-100"
               )}
             >
               <HiOutlineTranslate className="text-md" />
@@ -39,7 +43,7 @@ export default function LocaleSwitch() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="dark:bg-gray-800 dark:text-gray-400 dark:highlight-white/5 absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y dark:divide-gray-500 divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           {["en", "vi"].map((locale) => (
             <Menu.Item key={locale} disabled={locale === currentLocale}>
               {({ active, disabled }) =>
@@ -53,7 +57,7 @@ export default function LocaleSwitch() {
                     href={asPath}
                     locale={locale}
                     className={$(
-                      "flex px-4 py-2 text-sm",
+                      "flex px-4 py-2 text-sm dark:hover:bg-gray-600 dark:hover:text-gray-100",
                       active && !disabled && "bg-gray-100"
                     )}
                     aria-current={disabled ? "page" : undefined}

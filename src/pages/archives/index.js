@@ -72,11 +72,15 @@ const PostSection = ({ classifiedPosts }) => {
   );
 };
 
-export const getStaticProps = () => {
+export const getStaticProps = ({ locale }) => {
   return {
     props: {
-      classifiedPosts: classifyPosts(reducedAllBlogPosts),
-      classifiedSnippets: classifyPosts(reducedAllSnippets),
+      classifiedPosts: classifyPosts(
+        reducedAllBlogPosts.filter((x) => x.locale === locale)
+      ),
+      classifiedSnippets: classifyPosts(
+        reducedAllSnippets.filter((x) => x.locale === locale)
+      ),
       allSeries,
       allTags,
     },
