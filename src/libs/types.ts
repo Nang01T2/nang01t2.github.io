@@ -1,4 +1,5 @@
 import { Post as TPost } from "contentlayer/generated";
+import type { Author } from "contentlayer/generated";
 
 export type Optional<Type, Key extends keyof Type> = Omit<Type, Key> &
   Partial<Pick<Type, Key>>;
@@ -36,3 +37,5 @@ export type Toc = {
   url: string;
   depth: number;
 }[];
+
+export type AuthorFrontMatter = Author;

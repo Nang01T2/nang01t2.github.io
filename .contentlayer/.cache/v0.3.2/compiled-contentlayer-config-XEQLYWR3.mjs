@@ -104,6 +104,47 @@ function resolveSlug(raw) {
   const [, locale, ...rest] = raw.flattenedPath.split("/");
   return { locale, slug: rest.join("/") };
 }
+var Author = defineDocumentType(() => ({
+  name: "Author",
+  filePathPattern: `authors/**/*+(.md|.mdx)`,
+  contentType: "mdx",
+  fields: {
+    name: {
+      type: "string",
+      required: true
+    },
+    avatar: {
+      type: "string",
+      required: true
+    },
+    occupation: {
+      type: "string"
+    },
+    company: {
+      type: "string"
+    },
+    email: {
+      type: "string"
+    },
+    twitter: {
+      type: "string"
+    },
+    github: {
+      type: "string"
+    }
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => `/${resolveSlug(doc._raw).slug}`
+    },
+    locale: {
+      type: "enum",
+      options: ["en", "vi"],
+      resolve: (doc) => resolveSlug(doc._raw).locale
+    }
+  }
+}));
 var Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: `posts/**/*+(.md|.mdx)`,
@@ -113,10 +154,6 @@ var Post = defineDocumentType(() => ({
     slug: {
       type: "string",
       resolve: (post) => `/${resolveSlug(post._raw).slug}`
-    },
-    url: {
-      type: "string",
-      resolve: (post) => `/${post._raw.flattenedPath}`
     },
     locale: {
       type: "enum",
@@ -139,14 +176,15 @@ var Post = defineDocumentType(() => ({
 }));
 var contentlayer_config_default = makeSource({
   contentDirPath: "content",
-  documentTypes: [Post],
+  documentTypes: [Author, Post],
   mdx: {
     remarkPlugins: mdxOptions_default.remarkPlugins,
     rehypePlugins: mdxOptions_default.remarkPlugins
   }
 });
 export {
+  Author,
   Post,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-EHHN5CVE.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-XEQLYWR3.mjs.map

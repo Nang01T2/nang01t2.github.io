@@ -24,9 +24,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".contentlayer/generated",
-    "src/pages/blog/[...slugs].js",
-    "src/components/LocaleSwitch.js"
+    ".contentlayer/generated"
   ],
   "exclude": ["node_modules"]
 }

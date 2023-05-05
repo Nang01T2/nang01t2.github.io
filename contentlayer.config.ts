@@ -26,6 +26,48 @@ function resolveSlug(raw: RawDocumentData) {
   return { locale, slug: rest.join("/") };
 }
 
+export const Author = defineDocumentType(() => ({
+  name: "Author",
+  filePathPattern: `authors/**/*+(.md|.mdx)`,
+  contentType: "mdx",
+  fields: {
+    name: {
+      type: "string",
+      required: true,
+    },
+    avatar: {
+      type: "string",
+      required: true,
+    },
+    occupation: {
+      type: "string",
+    },
+    company: {
+      type: "string",
+    },
+    email: {
+      type: "string",
+    },
+    twitter: {
+      type: "string",
+    },
+    github: {
+      type: "string",
+    },
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => `/${resolveSlug(doc._raw).slug}`,
+    },
+    locale: {
+      type: "enum",
+      options: ["en", "vi"],
+      resolve: (doc) => resolveSlug(doc._raw).locale,
+    },
+  },
+}));
+
 export const Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: `posts/**/*+(.md|.mdx)`,
@@ -35,10 +77,6 @@ export const Post = defineDocumentType(() => ({
     slug: {
       type: "string",
       resolve: (post) => `/${resolveSlug(post._raw).slug}`,
-    },
-    url: {
-      type: "string",
-      resolve: (post) => `/${post._raw.flattenedPath}`,
     },
     locale: {
       type: "enum",
@@ -62,7 +100,7 @@ export const Post = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Post],
+  documentTypes: [Author, Post],
   mdx: {
     remarkPlugins: mdxOptions.remarkPlugins,
     rehypePlugins: mdxOptions.remarkPlugins,
