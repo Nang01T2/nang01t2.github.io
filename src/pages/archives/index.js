@@ -1,25 +1,25 @@
-import React from "react";
-import dayjs from "dayjs";
-import { motion } from "framer-motion";
-import { fadeInHalf, staggerHalf } from "@/data/animations";
-import Container from "@/components/layouts/Container";
-import { PageSEO } from "@/components/SEO";
-import Link from "next/link";
+import React from 'react';
+import dayjs from 'dayjs';
+import { motion } from 'framer-motion';
+import { fadeInHalf, staggerHalf } from '@/data/animations';
+import Container from '@/components/layouts/Container';
+import { PageSEO } from '@/components/SEO';
+import Link from 'next/link';
 
-import Hr from "@/components/common/Hr";
-import IconText from "@/components/common/IconText";
-import LinkHover from "@/components/common/LinkHover";
-import PlainText from "@/components/common/PlainText";
-import SubTitle from "@/components/common/SubTitle";
-import Tag from "@/components/common/Tag";
-import Title from "@/components/common/Title";
-import ListIcon from "@/components/icons/ListIcon";
+import Hr from '@/components/common/Hr';
+import IconText from '@/components/common/IconText';
+import LinkHover from '@/components/common/LinkHover';
+import PlainText from '@/components/common/PlainText';
+import SubTitle from '@/components/common/SubTitle';
+import Tag from '@/components/common/Tag';
+import Title from '@/components/common/Title';
+import ListIcon from '@/components/icons/ListIcon';
 import {
   allSeries,
   allTags,
   reducedAllBlogPosts,
   reducedAllSnippets,
-} from "@/data/dataset";
+} from '@/data/dataset';
 
 const classifyPosts = (posts) => {
   return [...posts]
@@ -58,7 +58,7 @@ const PostSection = ({ classifiedPosts }) => {
                   >
                     <div className="flex items-end gap-1">
                       <span className="mb-0.5 w-8 text-xs">
-                        {dayjs(post.date).format("MM.DD")}
+                        {dayjs(post.date).format('MM.DD')}
                       </span>
                       <span>{post.title}</span>
                     </div>
@@ -81,7 +81,10 @@ export const getStaticProps = ({ locale }) => {
       classifiedSnippets: classifyPosts(
         reducedAllSnippets.filter((x) => x.locale === locale)
       ),
-      allSeries,
+      allSeries: allSeries.map((x) => ({
+        ...x,
+        posts: x.posts.filter((p) => p.locale === locale),
+      })),
       allTags,
     },
   };
@@ -93,6 +96,7 @@ export default function ArchivePage({
   allSeries,
   allTags,
 }) {
+  //console.log('allSeries', allSeries);
   return (
     <Container className="flex flex-col justify-between">
       <PageSEO
@@ -130,7 +134,7 @@ export default function ArchivePage({
                   <span>{series.title}</span>
                   <div className="text-tertiary flex gap-2">
                     <span className="text-xs">
-                      {dayjs(series.date).format("YYYY-MM-DD")}
+                      {dayjs(series.date).format('YYYY-MM-DD')}
                     </span>
                     <IconText Icon={ListIcon} text={series.posts.length} />
                   </div>

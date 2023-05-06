@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   fadeIn,
   fadeInHalf,
@@ -7,27 +7,28 @@ import {
   fadeInUp,
   staggerHalf,
   staggerOne,
-} from "@/data/animations";
-import Link from "next/link";
-import useSearch from "@/libs/useSearch";
-import PlainText from "@/components/common/PlainText";
-import SearchInput from "@/components/common/SearchInput";
-import Container from "@/components/layouts/Container";
-import { PageSEO } from "@/components/SEO";
-import PostListItem from "@/components/PostListItem";
-import CollectionItem from "@/components/CollectionItem";
-import Title from "@/components/common/Title";
-import SubTitle from "@/components/common/SubTitle";
-import { allSeries, reducedAllBlogPosts } from "@/data/dataset";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+} from '@/data/animations';
+import Link from 'next/link';
+import useSearch from '@/libs/useSearch';
+import PlainText from '@/components/common/PlainText';
+import SearchInput from '@/components/common/SearchInput';
+import Container from '@/components/layouts/Container';
+import { PageSEO } from '@/components/SEO';
+import PostListItem from '@/components/PostListItem';
+import CollectionItem from '@/components/CollectionItem';
+import Title from '@/components/common/Title';
+import SubTitle from '@/components/common/SubTitle';
+import { allSeries, reducedAllBlogPosts } from '@/data/dataset';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export const getStaticProps = async ({ locale }) => {
   return {
     props: {
       postList: reducedAllBlogPosts.filter((x) => x.locale === locale),
+      //seriesList: [],
       seriesList: allSeries,
-      ...(await serverSideTranslations(locale, ["common", "blog"])),
+      ...(await serverSideTranslations(locale, ['common', 'blog'])),
     },
   };
 };
@@ -36,7 +37,7 @@ export default function BlogPage({ postList, seriesList }) {
   const { searchValue, searchHandler } = useSearch();
   const [filteredBlogPosts, setFilteredBlogPosts] = useState([]);
   const [filteredSeries, setFilteredSeries] = useState([]);
-  const { t } = useTranslation("blog");
+  const { t } = useTranslation('blog');
 
   //console.log("postList", postList);
   useEffect(() => {
@@ -52,9 +53,9 @@ export default function BlogPage({ postList, seriesList }) {
     );
   }, [searchValue, postList]);
 
-  useEffect(() => {
-    console.log("postList", postList);
-  }, [postList]);
+  // useEffect(() => {
+  //   console.log('postList', postList);
+  // }, [postList]);
 
   return (
     <Container className="flex flex-col justify-between">
@@ -96,7 +97,7 @@ export default function BlogPage({ postList, seriesList }) {
           variants={fadeInHalf}
         >
           <SubTitle>
-            {!searchValue ? t("all-posts") : t("filtered-posts")}
+            {!searchValue ? t('all-posts') : t('filtered-posts')}
           </SubTitle>
           <span className="font-bold">({filteredBlogPosts.length})</span>
         </motion.div>

@@ -1,33 +1,33 @@
-import { motion } from "framer-motion";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { useRef } from "react";
+import { motion } from 'framer-motion';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRef } from 'react';
 
-import Hr from "@/components/common/Hr";
-import Pill from "@/components/common/Pill";
-import PostListItem from "@/components/PostListItem";
-import SnippetListItem from "@/components/SnippetListItem";
-import Title from "@/components/common/Title";
-import Layout from "@/components/layouts/Container";
-import { PageSEO } from "@/components/SEO";
-import { fadeIn, fadeInUp, staggerOne } from "@/data/animations";
-import { allBlogPosts, allSnippets, allTags } from "@/data/dataset";
-import { reducePost } from "@/libs/post";
-import { ReducedPost } from "@/libs/types";
+import Hr from '@/components/common/Hr';
+import Pill from '@/components/common/Pill';
+import PostListItem from '@/components/PostListItem';
+import SnippetListItem from '@/components/SnippetListItem';
+import Title from '@/components/common/Title';
+import Layout from '@/components/layouts/Container';
+import { PageSEO } from '@/components/SEO';
+import { fadeIn, fadeInUp, staggerOne } from '@/data/animations';
+import { allBlogPosts, allSnippets, allTags } from '@/data/dataset';
+import { reducePost } from '@/libs/post';
+import { ReducedPost } from '@/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: allTags.map((tag) => `/archives/tags/${tag}`),
-    fallback: "blocking",
+    fallback: 'blocking',
   };
 };
 
-export const getStaticProps: GetStaticProps = ({ params }) => {
-  const tag = (params?.tag ?? "") as string;
+export const getStaticProps: GetStaticProps = ({ locale, params }) => {
+  const tag = (params?.tag ?? '') as string;
   const posts = allBlogPosts
-    .filter((post) => post.tags.includes(tag))
+    .filter((post) => post.locale === locale && post.tags.includes(tag))
     .map(reducePost);
   const snippets = allSnippets
-    .filter((post) => post.tags.includes(tag))
+    .filter((post) => post.locale === locale && post.tags.includes(tag))
     .map(reducePost);
 
   if (posts.length + snippets.length === 0) {
@@ -56,10 +56,10 @@ export default function TagPage({
   const postsLength = posts.length + snippets.length;
 
   const scrollToPosts = () => {
-    postsRef.current?.scrollIntoView({ behavior: "smooth" });
+    postsRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   const scrollToSnippets = () => {
-    snippetsRef.current?.scrollIntoView({ behavior: "smooth" });
+    snippetsRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

@@ -1,30 +1,36 @@
-import React from "react";
-import { allSeries, allSeriesName } from "@/data/dataset";
-import dayjs from "dayjs";
-import { motion } from "framer-motion";
+import React from 'react';
+import { allSeries, allSeriesName } from '@/data/dataset';
+import dayjs from 'dayjs';
+import { motion } from 'framer-motion';
 import {
   fadeIn,
   fadeInSlideToLeft,
   fadeInUp,
   staggerTwo,
-} from "@/data/animations";
+} from '@/data/animations';
 
-import Container from "@/components/layouts/Container";
-import { PageSEO } from "@/components/SEO";
-import HoverCard from "@/components/HoverCard";
-import PostListItem from "@/components/PostListItem";
-import IconText from "@/components/common/IconText";
-import CalenderIcon from "@/components/icons/CalenderIcon";
-import ListIcon from "@/components/icons/ListIcon";
+import Container from '@/components/layouts/Container';
+import { PageSEO } from '@/components/SEO';
+import HoverCard from '@/components/HoverCard';
+import PostListItem from '@/components/PostListItem';
+import IconText from '@/components/common/IconText';
+import CalenderIcon from '@/components/icons/CalenderIcon';
+import ListIcon from '@/components/icons/ListIcon';
 
-export const getStaticPaths = async () => {
+export const getStaticPaths = async ({ locales }) => {
   return {
-    paths: allSeriesName.map((seriesName) => `/blog/${seriesName}`),
+    paths: locales
+      .map((l) =>
+        [l, allSeriesName.map((seriesName) => `blog/${seriesName}`)]
+          .flatMap((x) => x)
+          .join('/')
+      )
+      .map((i) => `/${i}`),
     fallback: false,
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ locale, params }) => {
   const { slug } = params;
 
   const series = allSeries.find((v) => v.seriesName === slug);
@@ -37,12 +43,16 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: {
-      series,
+      series: {
+        ...series,
+        posts: series.posts?.filter((x) => x.locale === locale),
+      },
     },
   };
 };
 
 export default function BlogPage({ series }) {
+  //console.log('series', series);
   return (
     <Container className="flex flex-col justify-between">
       <PageSEO
@@ -74,7 +84,7 @@ export default function BlogPage({ series }) {
               <div className="text-secondary mt-1 flex gap-2">
                 <IconText
                   Icon={CalenderIcon}
-                  text={dayjs(series.date).format("YY.MM.DD")}
+                  text={dayjs(series.date).format('YY.MM.DD')}
                 />
                 <IconText
                   Icon={ListIcon}

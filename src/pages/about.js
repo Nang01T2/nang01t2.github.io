@@ -1,36 +1,24 @@
-// import { MDXRenderer } from "@/components/MDXComponents"
-import AuthorLayout from "@/components/layouts/AuthorLayout";
-import { allAuthors } from "contentlayer/generated";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import AuthorLayout from '@/components/layouts/AuthorLayout';
+import { allAuthors } from 'contentlayer/generated';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { getFileBySlug } from '@/libs/mdx';
+import MdxRenderer from '../components/MdxRenderer';
 
 export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      author: {
-        name: "AAA",
-        avatar: "https://avatars.githubusercontent.com/u/8766071?s=400&v=4",
-        occupation: "AA",
-        company: "SS",
-        email: "thaonguyen83@gmail.com",
-        twitter: "",
-        github: "https://github.com/nang01t2",
-      },
-    },
-  };
+  const detail = await getFileBySlug('authors', '', locale);
   return {
     props: {
       author: allAuthors.find((author) => author.locale === locale),
-      ...(await serverSideTranslations(locale, ["common"])),
+      content: detail.content,
+      ...(await serverSideTranslations(locale, ['common'])),
     },
   };
 }
 
-export default function About({ author }) {
-  console.log("AAA", author);
+export default function About({ author, content }) {
   return (
     <AuthorLayout frontMatter={author}>
-      {/* <MDXRenderer mdxSource={author.body.code} /> */}
-      TODO
+      <MdxRenderer code={content} />
     </AuthorLayout>
   );
 }

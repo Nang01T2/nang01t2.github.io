@@ -1,10 +1,9 @@
-import SocialIcon from "@/components/social-icons";
-import Image from "@/components/Image";
-import { PageSEO } from "@/components/SEO";
-import { ReactNode } from "react";
-import { AuthorFrontMatter } from "@/libs/types";
-import Container from "@/components/layouts/Container";
-import ContactsIcon from "../common/ContactsIcon";
+import SocialIcon from '@/components/social-icons';
+import Image from '@/components/Image';
+import { PageSEO } from '@/components/SEO';
+import { ReactNode } from 'react';
+import { AuthorFrontMatter } from '@/libs/types';
+import Container from '@/components/layouts/Container';
 
 interface Props {
   children: ReactNode;
@@ -39,7 +38,6 @@ export default function AuthorLayout({ children, frontMatter }: Props) {
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
             <div className="text-gray-500 dark:text-gray-400">{company}</div>
             <div className="flex space-x-5 pt-6">
-              {/* <ContactsIcon contact="email" /> */}
               <SocialIcon kind="mail" href={`mailto:${email}`} size={6} />
               <SocialIcon kind="github" href={github} size={6} />
               <SocialIcon kind="twitter" href={twitter} size={6} />
