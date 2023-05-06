@@ -18,14 +18,18 @@ import CalenderIcon from '@/components/icons/CalenderIcon';
 import ListIcon from '@/components/icons/ListIcon';
 
 export const getStaticPaths = async ({ locales }) => {
+  //const paths = allSeriesName.map((seriesName) => `/blog/${seriesName}`);
   return {
-    paths: locales
-      .map((l) =>
-        [l, allSeriesName.map((seriesName) => `blog/${seriesName}`)]
-          .flatMap((x) => x)
-          .join('/')
-      )
-      .map((i) => `/${i}`),
+    paths:
+      allSeriesName.length > 0
+        ? locales
+            .map((l) =>
+              [l, allSeriesName.map((seriesName) => `blog/${seriesName}`)]
+                .flatMap((x) => x)
+                .join('/')
+            )
+            .map((i) => `/${i}`)
+        : [],
     fallback: false,
   };
 };
@@ -33,8 +37,9 @@ export const getStaticPaths = async ({ locales }) => {
 export const getStaticProps = async ({ locale, params }) => {
   const { slug } = params;
 
-  const series = allSeries.find((v) => v.seriesName === slug);
-
+  const series = allSeries.find(
+    (v) => v.locale === locale && v.seriesName === slug
+  );
   if (!series) {
     return {
       notFound: true,
@@ -52,7 +57,7 @@ export const getStaticProps = async ({ locale, params }) => {
 };
 
 export default function BlogPage({ series }) {
-  //console.log('series', series);
+  if (!series) return null;
   return (
     <Container className="flex flex-col justify-between">
       <PageSEO

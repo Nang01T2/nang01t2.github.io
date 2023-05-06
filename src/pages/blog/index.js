@@ -26,8 +26,7 @@ export const getStaticProps = async ({ locale }) => {
   return {
     props: {
       postList: reducedAllBlogPosts.filter((x) => x.locale === locale),
-      //seriesList: [],
-      seriesList: allSeries,
+      seriesList: allSeries.filter((x) => x.locale === locale),
       ...(await serverSideTranslations(locale, ['common', 'blog'])),
     },
   };
@@ -39,7 +38,7 @@ export default function BlogPage({ postList, seriesList }) {
   const [filteredSeries, setFilteredSeries] = useState([]);
   const { t } = useTranslation('blog');
 
-  //console.log("postList", postList);
+  //console.log('seriesList', seriesList);
   useEffect(() => {
     setFilteredSeries(
       seriesList.filter((series) =>
@@ -51,7 +50,7 @@ export default function BlogPage({ postList, seriesList }) {
         post.title.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
-  }, [searchValue, postList]);
+  }, [searchValue, postList, seriesList]);
 
   // useEffect(() => {
   //   console.log('postList', postList);
