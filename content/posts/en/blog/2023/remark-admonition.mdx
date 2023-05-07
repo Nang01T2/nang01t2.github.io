@@ -1,82 +1,124 @@
 ---
-title: 'How to support admonition (or callout) in Markdown'
-description: 'How to support admonition (or callout) in Markdown'
+title: "How to highlight text (also known as admonition/callout) in Markdown"
+description: "Support admonition/callout boxes in Markdown rendering"
 tags:
   - markdown
   - remark
+  - react
 draft: false
 date: 2023-05-06
 ---
 
-Sometimes you may want to emphasize that command is destructive or note additional information in your blog or docs like this:
+## Problem
 
+Markdown is a popular choice for document writing. Recently, I wanted to emphasize a particular block of text or take note of additional information in my Markown document like this:
+
+:::info
+This is an example of highlighting text. It is also known as a callout or admonition.
+:::
+
+However, the interesting feature is not included in standard Markdown. In this post, I'll show you how to support it and use notation with `remark` plugins.
+
+## Admonition/Callout
+
+Admonitions (also known as callouts) used to describe a way of highlighting parts of a text or a note with a box or a symbol to draw attention or convey some extra information. They are often used in technical documents, tutorials or personal knowledge management system.
+
+### Admonition types
+
+The following admonition types will be implemented:
+
+**info**
 :::info
 This is a info `Admonition`. Markdown syntax _is_ **supported**.
 :::
 
+**warn**
+:::warn
+This is a warn `Admonition`. Markdown syntax _is_ **supported**.
+:::
+
+**danger**
 :::danger
 This is a danger `Admonition`. Markdown syntax _is_ **supported**.
 :::
 
-But this is not included in standard Markdown or GitHub Flavored Markdown. In this post, I will show you how to support this feature and notation with `remark` plugins.
+## Remark plugins
 
 :::warn
 I assume you've already set up a static site generator that supports MDX by unified pipeline.
 :::
 
-## Remark plugins
-
 ### Support notation
 
-We'd like to add this custom notation for admonition:
+We would like to add custom notations for admonition as follows:
 
 ```
 :::info
-Laboris dolore aliquip laboris irure.
+This is a info 'Admonition'
 :::
 ```
 
-Fortunately, we don't have to write any code as there is [remark-directive](https://github.com/remarkjs/remark-directive) that does exactly what we need.
+```
+:::danger
+This is a danger 'Admonition'
+:::
+```
+
+```
+:::warn
+This is a warn 'Admonition'
+:::
+```
+
+Luckily, we don't need to write any code as [remark-directive](https://github.com/remarkjs/remark-directive) does exactly what we need.
+
+_Install with yarn_
 
 ```bash
 yarn add remark-directive
 ```
 
+_Install with npm_
+
+```bash
+npm i remark-directive
+```
+
 And add it to your own `unified` pipeline.
 
 ```ts
-import remarkDirective from 'remark-directive';
-import remarkAdmonition from './remarkAdmonitions'; // We'll implement this next
+import remarkDirective from "remark-directive";
+import remarkAdmonition from "./remarkAdmonitions"; // We'll implement this next
 
 const remarkPlugins = [remarkDirective, remarkAdmonition];
 ```
 
 ### Convert to `mdxJsxFlowElement`
 
-But `remark-directive` doesn't do everything we need for displaying admonitions. To convert the block into an MDX component, define the following plugin:
+However, `remark-directive` doesn't fulfill all our requirements for displaying admonitions. To transform the block into an MDX component, we need to define the following plugin:
 
 ```ts title="remark-admonition.ts"
-import { visit } from 'unist-util-visit';
+import { visit } from "unist-util-visit";
 
 export default function remarkAdmonition() {
   return (tree) => {
     visit(tree, (node) => {
       if (
-        node.type === 'textDirective' ||
-        node.type === 'leafDirective' ||
-        node.type === 'containerDirective'
+        node.type === "textDirective" ||
+        node.type === "leafDirective" ||
+        node.type === "containerDirective"
       ) {
-        if (!['info', 'warn', 'danger'].includes(node.name)) return;
+        if (!["info", "warn", "danger"].includes(node.name)) return;
         // Store node.name before overwritten with "Alert".
         const status = node.name;
 
         const data = node.data || (node.data = {});
-        const tagName = node.type === 'textDirective' ? 'span' : 'div';
+        const tagName = node.type === "textDirective" ? "span" : "div";
 
-        node.type = 'mdxJsxFlowElement';
-        node.name = 'Admonition';
+        node.type = "mdxJsxFlowElement";
+        node.name = "Admonition";
         node.attributes = [
-          { type: 'mdxJsxAttribute', name: 'status', value: status },
+          { type: "mdxJsxAttribute", name: "status", value: status },
         ];
       }
     });
@@ -90,17 +132,17 @@ Note that the node's name is `Admonition`. We'll have to add a custom MDX compon
 
 ## React component and styles
 
-Then we need a React component that accepts the `status` property. This value comes from any of `:::info`, `:::warn` or `:::danger`.
+Next, we require a React component that takes the `status` property. This value is derived from any of the following: `:::info`, `:::warn` or `:::danger`.
 
 ```tsx title="Admonition.tsx"
-import { HiInformationCircle, HiExclamationTriangle } from 'react-icons/hi2';
-import clsx from 'clsx';
-import React from 'react';
+import { HiInformationCircle, HiExclamationTriangle } from "react-icons/hi2";
+import clsx from "clsx";
+import React from "react";
 
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
-type SvgComponent = React.ComponentType<React.ComponentProps<'svg'>>;
-type Status = 'info' | 'danger' | 'warn';
+type SvgComponent = React.ComponentType<React.ComponentProps<"svg">>;
+type Status = "info" | "danger" | "warn";
 
 type Props = {
   status?: Status;
@@ -116,7 +158,7 @@ const statusIconMap: { [S in Status]: SvgComponent } = {
 };
 
 export default function Message({
-  status = 'info',
+  status = "info",
   children,
   className,
 }: Props) {
@@ -212,11 +254,11 @@ $dangerColor: #e53e3e;
 
 ## Pass it as a custom component
 
-Now, register it as a custom component otherwise MDX complains that you've forgotten to import it!
+Now, we need to register it as a custom component, otherwise MDX will complain that it hasn't been imported.
 
 ```tsx
-import { MDXProvider } from '@mdx-js/react';
-import Admonition from '@/components/Admonition';
+import { MDXProvider } from "@mdx-js/react";
+import Admonition from "@/components/Admonition";
 
 const components = {
   Admonition,
@@ -232,11 +274,11 @@ export default function Post(props) {
 ```
 
 :::warn
-Exact code could be different if you're using [mdx-bundler](https://github.com/kentcdodds/mdx-bundler), [Contentlayer](https://www.contentlayer.dev/), or anything else. But there should be a similar API for adding components.
+The exact code could be different if you're using [mdx-bundler](https://github.com/kentcdodds/mdx-bundler), [Contentlayer](https://www.contentlayer.dev/), or anything else. However, there should be a similar API for adding components.
 :::
 
 ## That's all
 
-You can add another type like `:::note` or anything, and style the component as you want.
+You can add another type such as `:::note` or anything else, and style the component according to your preference.
 
 Thank you for reading!
