@@ -1,12 +1,8 @@
-import clsx from "clsx";
-import React from "react";
-import Hr from "../common/Hr";
-
-import { type Toc } from "@/libs/types";
-
+import { $ } from "@/libs/core";
+import { Toc } from "@/libs/types";
 import styles from "./styles.module.scss";
 
-type Props = {
+interface TOCInlineProps {
   toc: Toc;
   indentDepth?: number;
   fromHeading?: number;
@@ -14,21 +10,31 @@ type Props = {
   asDisclosure?: boolean;
   exclude?: string | string[];
   className?: string;
-  extraLinks?: React.ReactNode;
-  anchorsContainerSelector: string;
-};
+}
 
-export default function TableOfContents({
+/**
+ * Generates an inline table of contents
+ * Exclude titles matching this string (new RegExp('^(' + string + ')$', 'i')).
+ * If an array is passed the array gets joined with a pipe (new RegExp('^(' + array.join('|') + ')$', 'i')).
+ *
+ * @param {TOCInlineProps} {
+ *   toc,
+ *   indentDepth = 3,
+ *   fromHeading = 1,
+ *   toHeading = 6,
+ *   asDisclosure = false,
+ *   exclude = '',
+ * }
+ *
+ */
+const TableOfContents = ({
   toc,
   indentDepth = 3,
   fromHeading = 1,
-  toHeading = 3,
-  asDisclosure = true,
+  toHeading = 6,
   exclude = "",
-  anchorsContainerSelector,
-  extraLinks,
   className,
-}: Props) {
+}: TOCInlineProps) => {
   const re = Array.isArray(exclude)
     ? new RegExp("^(" + exclude.join("|") + ")$", "i")
     : new RegExp("^(" + exclude + ")$", "i");
@@ -41,61 +47,42 @@ export default function TableOfContents({
   );
 
   const tocList = (
-    <ul>
-      {filteredToc?.map((heading) => (
+    <ul className="m-0 flex flex-col gap-[0.2rem]">
+      {filteredToc.map((heading) => (
         <li
           key={heading.value}
-          className={`${heading.depth >= indentDepth && "ml-6"}`}
+          className={`${heading.depth >= indentDepth && "ml-5"}`}
         >
-          <a href={heading.url}>{heading.value}</a>
+          <a
+            href={heading.url}
+            className="text-sm text-gray-600 hover:text-black hover:underline"
+          >
+            {heading.value}
+          </a>
         </li>
       ))}
     </ul>
   );
 
   return (
-    <div className={className}>
-      {asDisclosure ? (
-        <details open>
-          <summary className="ml-1 text-xl font-sans">
-            Table of Contents
-          </summary>
-          <div className="ml-6">{tocList}</div>
-        </details>
-      ) : (
-        tocList
+    <details
+      open
+      className={$(
+        "select-none overflow-hidden rounded-lg border border-gray-200",
+        className
       )}
-      {/* <Hr className="mt-0" /> */}
-    </div>
+    >
+      <summary
+        className={$(
+          styles.summary,
+          "bg-gray-100 py-2 px-3 font-bold transition-colors hover:cursor-pointer"
+        )}
+      >
+        Table of contents
+      </summary>
+      <aside className="border-t p-4">{tocList}</aside>
+    </details>
   );
+};
 
-  // return (
-  //   <nav id="toc" className={clsx(styles.Block, "scrollbar", className)}>
-  //     {toc.length > 0 && (
-  //       <>
-  //         <div className={styles.title}>Contents</div>
-  //         <ul className={styles.list}>
-  //           {filteredToc.map((heading) => (
-  //             <li key={heading.value}>
-  //               <a
-  //                 href={heading.url}
-  //                 className={clsx(
-  //                   styles.item,
-  //                   heading.depth >= indentDepth && styles.indent
-  //                 )}
-  //                 data-depth={heading.depth}
-  //               >
-  //                 {heading.value}
-  //               </a>
-  //             </li>
-  //           ))}
-  //         </ul>
-  //       </>
-  //     )}
-  //     <div className={styles.extra}>
-  //       <hr />
-  //       {extraLinks}
-  //     </div>
-  //   </nav>
-  // );
-}
+export default TableOfContents;

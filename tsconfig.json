@@ -25,7 +25,12 @@
     "**/*.ts",
     "**/*.tsx",
     ".contentlayer/generated",
-    "src/components/LinkOrEmbed.js"
+    "src/components/LinkOrEmbed.js",
+    "src/libs/utils/url.js",
+    "src/libs/utils/object.js",
+    "src/pages/embed/[url].js",
+    "src/libs/site-metadata/getSiteMetadata.js",
+    "src/libs/site-metadata/getSiteMetadata.js"
   ],
   "exclude": ["node_modules"]
 }

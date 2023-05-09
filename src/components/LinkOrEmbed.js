@@ -26,6 +26,12 @@ export default function LinkOrEmbed({ href, children, ...rest }) {
     );
   }
 
+  // return (
+  //   <a target="_blank" rel="noopener noreferrer" href={href}>
+  //     {children}
+  //   </a>
+  // );
+
   return (
     <>
       <iframe
