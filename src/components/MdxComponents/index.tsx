@@ -1,11 +1,12 @@
-import { type MDXComponents } from 'mdx/types';
-import Image from 'next/image';
+import Image from "next/image";
 
-import A from '@/components/MdxComponents/A';
-import Message from '@/components/Message';
+import LinkOrEmbed from "@/components/LinkOrEmbed";
+import Message from "@/components/MdxComponents/Message";
+import Pre from "@/components/MdxComponents/Pre";
 
-export const mdxComponents: MDXComponents = {
-  a: A,
+export const mdxComponents = {
+  a: LinkOrEmbed,
   Image,
   Message,
+  pre: Pre,
 } as const;

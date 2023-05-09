@@ -24,7 +24,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".contentlayer/generated"
+    ".contentlayer/generated",
+    "src/components/LinkOrEmbed.js"
   ],
   "exclude": ["node_modules"]
 }
