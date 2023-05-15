@@ -14,7 +14,7 @@ const siteMetadata = {
   siteLogo: "/static/images/logo.png",
   image: "/static/images/avatar.png",
   socialBanner: "/static/images/twitter-card.png",
-  siteUrl: "",
+  siteUrl: "https://nangnguyen.vercel.app",
   siteRepo: "",
   github: "",
   twitter: "",

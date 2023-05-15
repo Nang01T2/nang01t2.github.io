@@ -101,6 +101,11 @@
     "ts-pattern" "^4.2.2"
     "type-fest" "^3.7.1"
 
+"@corex/deepmerge@^4.0.37":
+  "integrity" "sha512-N8uEMrMPL0cu/bdboEWpQYb/0i2K5Qn8eCsxzOmxSggJbbQte7ljMRoXm917AbntqTGOzdTu+vP3KOOzoC70HQ=="
+  "resolved" "https://registry.npmjs.org/@corex/deepmerge/-/deepmerge-4.0.43.tgz"
+  "version" "4.0.43"
+
 "@effect-ts/core@^0.60.2":
   "integrity" "sha512-qi1WrtJA90XLMnj2hnUszW9Sx4dXP03ZJtCc5DiUBIOhF4Vw7plfb65/bdBySPoC9s7zy995TdUX1XBSxUkl5w=="
   "resolved" "https://registry.npmjs.org/@effect-ts/core/-/core-0.60.5.tgz"
@@ -353,7 +358,7 @@
     "@types/mdx" "^2.0.0"
     "@types/react" ">=16"
 
-"@next/env@13.3.1":
+"@next/env@*", "@next/env@13.3.1":
   "integrity" "sha512-EDtCoedIZC7JlUQ3uaQpSc4aVmyhbLHmQVALg7pFfQgOTjgSnn7mKtA0DiCMkYvvsx6aFb5octGMtWrOtGXW9A=="
   "resolved" "https://registry.npmjs.org/@next/env/-/env-13.3.1.tgz"
   "version" "13.3.1"
@@ -4235,7 +4240,7 @@
   dependencies:
     "brace-expansion" "^1.1.7"
 
-"minimist@^1.2.0", "minimist@^1.2.6":
+"minimist@^1.2.0", "minimist@^1.2.6", "minimist@^1.2.8":
   "integrity" "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA=="
   "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz"
   "version" "1.2.8"
@@ -4307,6 +4312,14 @@
   "integrity" "sha512-jKKt1p1z4otMA28AyeoAONixVjdYmgFCWwpEFtu+DwRHQDllVX3RjtyXbuCQiUZEfQ9rFPBpAI90vDeLZlMBdg=="
   "resolved" "https://registry.npmjs.org/next-seo/-/next-seo-6.0.0.tgz"
   "version" "6.0.0"
+
+"next-sitemap@^4.0.9":
+  "integrity" "sha512-8pbcEe4vrmgGEc3beVbrSqd8mTQ9lCsGxP+AOlArrGmeLkKD4TbSR41R2unQHHSTkBG8cQ/7gjKkdLBlzwtu6g=="
+  "resolved" "https://registry.npmjs.org/next-sitemap/-/next-sitemap-4.0.9.tgz"
+  "version" "4.0.9"
+  dependencies:
+    "@corex/deepmerge" "^4.0.37"
+    "minimist" "^1.2.8"
 
 "next-themes@^0.2.1":
   "integrity" "sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A=="

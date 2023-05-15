@@ -73,11 +73,11 @@ export default function EmbeddedPage({ siteMetadata }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={
-                siteMetadata.url.startsWith("https://rubiq.vercel.app")
+                siteMetadata.url.startsWith("https://nang01t2blog.vercel.app/")
                   ? "/static/favicons/favicon-32x32.png"
                   : faviconUrl(siteMetadata.url)
               }
-              alt="ファビコン"
+              alt="favicon"
               width="16"
               height="16"
             />
@@ -90,7 +90,7 @@ export default function EmbeddedPage({ siteMetadata }) {
             <img
               src={siteMetadata.ogp.image}
               className="ml-auto h-full object-cover"
-              alt="ページの画像"
+              alt="Image of the page"
             />
           )}
         </div>
