@@ -30,7 +30,9 @@
     "src/libs/utils/object.js",
     "src/pages/embed/[url].js",
     "src/libs/site-metadata/getSiteMetadata.js",
-    "src/libs/site-metadata/getSiteMetadata.js"
+    "src/libs/site-metadata/getSiteMetadata.js",
+    "src/components/Pagination.js",
+    "src/pages/index.js"
   ],
   "exclude": ["node_modules"]
 }
