@@ -1,0 +1,143 @@
+---
+title: " CTEs: A tool for simplifying and organizing complex queries."
+description: "How to use Common Table Expression (CTE) in SQL Server"
+tags:
+  - database
+  - sql server
+draft: false
+date: 2023-05-20
+---
+
+## Introduction
+I had to migrate some data from SQL Server for a new feature in my project. I wrote a script that can handle complex and reusable queries. I also used CTE (Common Table Expression) to make my code easier to read and maintain. In this post, I will show you what CTE is and how to use it.
+
+## CTE in sql server
+CTE stands for common table expression, which is a temporary result set that you can use in a statement like `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE`. CTEs help you structure your code better and let you perform multi-level aggregations on your data, such as finding the average of a group of counts.
+
+## CTE benefits 
+- CTEs improve the readability of code. And readable code makes debugging queries simplier.
+- CTEs allow you to use the results multiple times in the query. By saving the results of the subquery, you can use them again in a bigger query.
+- CTEs can help you do multi-level aggregations. Use CTEs to save the results of aggregations, which you can then use in the main query.
+
+## CTE syntax
+To create a CTE, you use the `WITH` keyword and a variable name that acts as a temporary table that you can use in other parts of your query.
+
+The following shows the common syntax of a CTE in SQL Server:
+```sql
+WITH cte_name[(column_name [,...])]
+AS
+    (CTE_definition)
+SQL_statement;
+```
+
+In this syntax:
+- First, given a name the cte `cte_name` that you can use later in a query.
+- Next, you can optionally list the columns after the cte_name, separated by commas. The columns must have the same number as the columns in the `CTE_definition`.
+- Then, after the cte name or the column list (if you have one), use the `AS` keyword.
+- After, define a `SELECT` statement whose result set populates the common table expression.
+- Finally, refer to the common table expression in a query (`SQL_statement`) such as `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE`.
+
+## CTE example
+
+Let's see some examples of how to use common table expressions.
+
+### Basic CTE example
+
+This query uses a CTE that shows the sales amounts of each sales staff in 2023:
+
+```sql
+WITH cte_sales_amounts (staff, sales, year) 
+AS (
+    SELECT    
+        first_name + ' ' + last_name, 
+        SUM(quantity * list_price * (1 - discount)),
+        YEAR(order_date)
+    FROM    
+        orders o
+    INNER JOIN order_items i ON i.order_id = o.order_id
+    INNER JOIN staffs s ON s.staff_id = o.staff_id
+    GROUP BY 
+        first_name + ' ' + last_name,
+        year(order_date)
+)
+
+SELECT
+    staff, 
+    sales
+FROM 
+    cte_sales_amounts
+WHERE
+    year = 2023;
+```
+
+### Using a CTE to calculate report averages from counts
+
+This example uses the CTE to calculate the mean number of sales orders in 2023 for all sales staffs.
+
+```sql
+WITH cte_sales AS (
+    SELECT 
+        staff_id, 
+        COUNT(*) order_count  
+    FROM
+        orders
+    WHERE 
+        YEAR(order_date) = 2023
+    GROUP BY
+        staff_id
+
+)
+SELECT
+    AVG(order_count) average_orders_by_staff
+FROM 
+    cte_sales;
+```
+
+### Using more than one CTE in a single query example
+
+```sql
+WITH cte_category_counts (
+    category_id, 
+    category_name, 
+    product_count
+)
+AS (
+    SELECT 
+        c.category_id, 
+        c.category_name, 
+        COUNT(p.product_id)
+    FROM 
+        production.products p
+        INNER JOIN production.categories c 
+            ON c.category_id = p.category_id
+    GROUP BY 
+        c.category_id, 
+        c.category_name
+),
+cte_category_sales(category_id, sales) AS (
+    SELECT    
+        p.category_id, 
+        SUM(i.quantity * i.list_price * (1 - i.discount))
+    FROM    
+        sales.order_items i
+        INNER JOIN production.products p 
+            ON p.product_id = i.product_id
+        INNER JOIN sales.orders o 
+            ON o.order_id = i.order_id
+    WHERE order_status = 4 -- completed
+    GROUP BY 
+        p.category_id
+) 
+
+SELECT 
+    c.category_id, 
+    c.category_name, 
+    c.product_count, 
+    s.sales
+FROM
+    cte_category_counts c
+    INNER JOIN cte_category_sales s 
+        ON s.category_id = c.category_id
+ORDER BY 
+    c.category_name;
+```
