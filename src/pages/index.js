@@ -25,8 +25,8 @@ export const getStaticProps = async ({ locale }) => {
 };
 
 export default function Home({ blogs, blogTotalCount }) {
-  console.log("blogList", blogs);
-  console.log("blogTotalCount", blogTotalCount);
+  //console.log("blogList", blogs);
+  //console.log("blogTotalCount", blogTotalCount);
   const { push } = useRouter();
   return (
     <Container className="flex flex-col justify-between">

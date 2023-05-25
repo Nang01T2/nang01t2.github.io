@@ -52,10 +52,9 @@ AS (
         first_name + ' ' + last_name, 
         SUM(quantity * list_price * (1 - discount)),
         YEAR(order_date)
-    FROM    
-        orders o
-    INNER JOIN order_items i ON i.order_id = o.order_id
-    INNER JOIN staffs s ON s.staff_id = o.staff_id
+    FROM orders o
+      INNER JOIN order_items i ON i.order_id = o.order_id
+      INNER JOIN staffs s ON s.staff_id = o.staff_id
     GROUP BY 
         first_name + ' ' + last_name,
         year(order_date)
@@ -69,6 +68,11 @@ FROM
 WHERE
     year = 2023;
 ```
+
+In this example:
+- First, we define a CTE named cte_sales_amounts which returns a result set that consists of three columns `staff`, `sales`, and `year`
+- Then, we constructed a query that gets the sum of sales by sales staff and year from the `orders`, `order_items` and `staffs` tables.
+- Finally, we referred to the CTE in the main query and selected only the rows whose years are 2023.
 
 ### Using a CTE to calculate report averages from counts
 
@@ -94,6 +98,7 @@ FROM
 ```
 
 ### Using more than one CTE in a single query example
+The following example gets the product count and sales amount for each product category; we use two CTEs: `cte_category_counts` and `cte_category_sales`. These CTEs are joined by the category_id column in the main query.
 
 ```sql
 WITH cte_category_counts (
@@ -106,10 +111,8 @@ AS (
         c.category_id, 
         c.category_name, 
         COUNT(p.product_id)
-    FROM 
-        production.products p
-        INNER JOIN production.categories c 
-            ON c.category_id = p.category_id
+    FROM products p
+        INNER JOIN categories c ON c.category_id = p.category_id
     GROUP BY 
         c.category_id, 
         c.category_name
@@ -118,12 +121,9 @@ cte_category_sales(category_id, sales) AS (
     SELECT    
         p.category_id, 
         SUM(i.quantity * i.list_price * (1 - i.discount))
-    FROM    
-        sales.order_items i
-        INNER JOIN production.products p 
-            ON p.product_id = i.product_id
-        INNER JOIN sales.orders o 
-            ON o.order_id = i.order_id
+    FROM order_items i
+        INNER JOIN products p ON p.product_id = i.product_id
+        INNER JOIN sales.orders o ON o.order_id = i.order_id
     WHERE order_status = 4 -- completed
     GROUP BY 
         p.category_id

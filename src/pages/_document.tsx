@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import { isDev } from "@/libs/core";
 
 export default function Document() {
   return (
@@ -43,6 +44,19 @@ export default function Document() {
       <body className="transition-[background] prose-headings:font-headings">
         <Main />
         <NextScript />
+
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        {!isDev && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          `,
+            }}
+          />
+        )}
       </body>
     </Html>
   );
