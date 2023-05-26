@@ -60,7 +60,7 @@ const siteMetadata = {
     simpleAnalytics: false,
     plausibleDataDomain: "",
     umamiWebsiteId: "",
-    googleAnalyticsId: "",
+    googleAnalyticsId: "G-QN72X3X4CW",
   },
 };
 

@@ -358,7 +358,12 @@
     "@types/mdx" "^2.0.0"
     "@types/react" ">=16"
 
-"@next/env@*", "@next/env@13.3.1":
+"@next/env@*", "@next/env@^13.4.4":
+  "integrity" "sha512-q/y7VZj/9YpgzDe64Zi6rY1xPizx80JjlU2BTevlajtaE3w1LqweH1gGgxou2N7hdFosXHjGrI4OUvtFXXhGLg=="
+  "resolved" "https://registry.npmjs.org/@next/env/-/env-13.4.4.tgz"
+  "version" "13.4.4"
+
+"@next/env@13.3.1":
   "integrity" "sha512-EDtCoedIZC7JlUQ3uaQpSc4aVmyhbLHmQVALg7pFfQgOTjgSnn7mKtA0DiCMkYvvsx6aFb5octGMtWrOtGXW9A=="
   "resolved" "https://registry.npmjs.org/@next/env/-/env-13.3.1.tgz"
   "version" "13.3.1"
