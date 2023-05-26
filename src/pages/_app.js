@@ -12,7 +12,7 @@ import { Toaster } from "react-hot-toast";
 import { MDXProvider } from "@mdx-js/react";
 import { mdxComponents } from "@/components/MdxComponents";
 import { seoConfig } from "@/data/siteConfig";
-import Analytics from "@/components/analytics";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import "dayjs/locale/en";
 
 import dayjs from "dayjs";
@@ -26,8 +26,10 @@ function App({ Component, pageProps }) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       <DefaultSeo {...seoConfig} />
+      <GoogleAnalytics />
+
       <MDXProvider components={mdxComponents}>
-        <Analytics />
+        {/* <Analytics /> */}
         <Component {...pageProps} />
         <Toaster
           toastOptions={{
