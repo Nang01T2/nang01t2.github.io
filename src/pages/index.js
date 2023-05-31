@@ -33,18 +33,19 @@ export default function Home({ blogs, blogTotalCount }) {
       <PageSEO />
       <PageTransition>
         <div>
-          {/* <div>
+          <div>
             <div className="mt-12 grid grid-cols-1 items-center text-center md:mt-24 md:grid-cols-6 md:text-left">
               <h1 className="order-2 col-span-5 text-4xl leading-tight sm:text-5xl md:order-1 md:leading-normal">
                 I&apos;m{" "}
                 <span className="text-teal-500 dark:text-teal-400">
                   {siteConfig.author.name}
                 </span>
-                . I&apos;m a software engineer, blogger working at Evizi.
+                . I&apos;m a software engineer, blogger.
               </h1>
+
               <div className="order-1 md:order-2">
                 <Image
-                  alt="Braydon Coyer"
+                  alt="Nguyen Nang"
                   height={160}
                   width={160}
                   src={siteConfig?.author?.photo}
@@ -69,7 +70,7 @@ export default function Home({ blogs, blogTotalCount }) {
                 More about me
               </Button>
             </div>
-          </div> */}
+          </div>
           {/* <BouncingBall /> */}
         </div>
       </PageTransition>

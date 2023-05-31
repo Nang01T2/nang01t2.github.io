@@ -1,5 +1,5 @@
 ---
-name: Nang Nguyen
+name: Nguyen Nang
 avatar: https://avatars.githubusercontent.com/u/8766071?s=400&v=4
 occupation: Kĩ sư phần mềm
 email: thaonguyen83.dn@gmail.com

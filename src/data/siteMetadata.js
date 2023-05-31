@@ -7,10 +7,10 @@ const siteMetadata = {
   theme: "system", // System, dark or light
   language: "en-us",
   title: "🔥 Personal blog",
-  author: "Nang Nguyen",
+  author: "Nguyen Nang",
   email: "thaonguyen83.dn@gmail.com",
   headerTitle: "👨‍💻",
-  description: "Nang Nguyen blog.",
+  description: "Nguyen Nang blog.",
   siteLogo: "/static/images/logo.png",
   image: "/static/images/avatar.png",
   socialBanner: "/static/images/twitter-card.png",
@@ -42,7 +42,7 @@ const siteMetadata = {
   },
   since: 2023,
   author: {
-    name: "Nang Nguyen",
+    name: "Nguyen Nang",
     photo: "",
     bio: "Software Engineer",
     contacts: {

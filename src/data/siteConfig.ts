@@ -2,13 +2,13 @@ import { DefaultSeoProps } from 'next-seo';
 
 export const siteConfig = {
   url: "https://nangnguyen.vercel.app",
-  title: "Nang Nguyen",
+  title: "Nguyen Nang",
   description: "Github Blog Testing",
-  copyright: "Nang Nguyen © All rights reserved.",
+  copyright: "Nguyen Nang © All rights reserved.",
   since: 2023,
   googleAnalyticsId: "",
   author: {
-    name: "Nang Nguyen",
+    name: "Nguyen Nang",
     photo: "https://avatars.githubusercontent.com/u/8766071?s=400&v=4",
     bio: "Software Engineer",
     contacts: {
