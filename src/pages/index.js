@@ -40,7 +40,7 @@ export default function Home({ blogs, blogTotalCount }) {
                 <span className="text-teal-500 dark:text-teal-400">
                   {siteConfig.author.name}
                 </span>
-                . I&apos;m a software engineer, blogger.
+                . I&apos;m a software engineer and blogger.
               </h1>
 
               <div className="order-1 md:order-2">
