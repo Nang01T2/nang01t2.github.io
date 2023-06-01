@@ -3,9 +3,10 @@
 import posts__en__blog__2023__commonTableExpressionsMdx from './posts__en__blog__2023__common-table-expressions.mdx.json' assert { type: 'json' }
 import posts__en__blog__2023__exampleMdx from './posts__en__blog__2023__example.mdx.json' assert { type: 'json' }
 import posts__en__blog__2023__remarkAdmonitionMdx from './posts__en__blog__2023__remark-admonition.mdx.json' assert { type: 'json' }
+import posts__en__blog__devSetting__eslintMdx from './posts__en__blog__dev-setting__eslint.mdx.json' assert { type: 'json' }
 import posts__en__blog__devSetting__tailwindcssMdx from './posts__en__blog__dev-setting__tailwindcss.mdx.json' assert { type: 'json' }
 import posts__en__snippets__react__lodashDebounceMdx from './posts__en__snippets__react__lodash-debounce.mdx.json' assert { type: 'json' }
 import posts__vi__blog__2023__exampleMdx from './posts__vi__blog__2023__example.mdx.json' assert { type: 'json' }
 import posts__vi__snippets__react__lodashDebounceMdx from './posts__vi__snippets__react__lodash-debounce.mdx.json' assert { type: 'json' }
 
-export const allPosts = [posts__en__blog__2023__commonTableExpressionsMdx, posts__en__blog__2023__exampleMdx, posts__en__blog__2023__remarkAdmonitionMdx, posts__en__blog__devSetting__tailwindcssMdx, posts__en__snippets__react__lodashDebounceMdx, posts__vi__blog__2023__exampleMdx, posts__vi__snippets__react__lodashDebounceMdx]
+export const allPosts = [posts__en__blog__2023__commonTableExpressionsMdx, posts__en__blog__2023__exampleMdx, posts__en__blog__2023__remarkAdmonitionMdx, posts__en__blog__devSetting__eslintMdx, posts__en__blog__devSetting__tailwindcssMdx, posts__en__snippets__react__lodashDebounceMdx, posts__vi__blog__2023__exampleMdx, posts__vi__snippets__react__lodashDebounceMdx]

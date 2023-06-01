@@ -1,0 +1,112 @@
+---
+title: 'How to set up ESLint with Next.js'
+description: ''
+icon: ''
+image: ''
+tags:
+  - tailwindcss
+  - nextjs
+  - eslint
+  - react
+draft: false
+date: 2023-06-01
+---
+
+When your project grows bigger and more developers join the team, it becomes more difficult to manage and maintain. How can you prevent this?
+
+You need to establish some common standards, practices, and tools early in the project to ensure that your code is consistent and clean everywhere.
+
+One of the tools that can help you with this is [ESLint](https://eslint.org/).
+
+https://eslint.org/
+
+## Introduction to ESLint
+
+ESLint is a tool that helps you find and fix problems in your `JavaScript` code. It can check for common errors, such as syntax mistakes, unused variables, or inconsistent formatting. It can also enforce best practices and coding standards, such as avoiding global variables, using strict mode, or following a specific style guide.
+
+## ESLint benefits
+
+Using ESLint can help you improve the quality and maintainability of your code. Some of the benefits are:
+
+- It can catch bugs and errors before they cause problems in your application or affect your users.
+- It can make your code more readable and consistent by following a set of rules that you can customize according to your preferences or project requirements.
+- It can help you learn from your mistakes and improve your skills as a JavaScript developer.
+- It can integrate with your editor, IDE, or build tools to provide real-time feedback and automated fixes.
+
+## Setup ESLint with Nextjs project
+
+Nextjs is a framework that allows you to create fast and user-friendly web applications using React. It comes with some built-in features, such as file-system routing, pre-rendering, code splitting, and API routes. To use ESLint with Nextjs, you need to install some dependencies and create a configuration file.
+
+First, install ESLint and the Nextjs plugin:
+
+```bash
+npm install --save-dev eslint eslint-config-next
+```
+
+Then, create a file named `.eslintrc.json` in the root of your project and add the following content:
+
+```json title=".eslintrc.json"
+{
+  "extends": "next"
+}
+```
+
+This tells ESLint to use the Nextjs plugin, which includes some rules that are specific to Nextjs projects.
+
+You can also add some other plugins or rules to customize your ESLint configuration. For example, you can use the `react-hooks` plugin to enforce the rules of hooks in your React components:
+
+```bash
+npm install --save-dev eslint-plugin-react-hooks
+```
+
+Then, add it to your `.eslintrc.json` file:
+
+```json title=".eslintrc.json"
+{
+  "extends": ["next", "plugin:react-hooks/recommended"]
+}
+```
+
+## Setup more plugins
+
+You can also use some other plugins to enhance your ESLint experience. Here are some examples:
+
+- **eslint-plugin-unused-imports**: This plugin can help you remove unused imports from your code, which can improve your performance and reduce your bundle size.
+- **eslint-plugin-import**: This plugin can help you manage your imports better, such as sorting them alphabetically, checking for duplicates, or ensuring consistency.
+- **eslint-plugin-tailwindcss**: This plugin can help you use Tailwind CSS in your Nextjs project, such as validating your class names, highlighting errors, or providing autocomplete suggestions.
+
+To install these plugins, run the following command:
+
+```bash
+npm install --save-dev eslint-plugin-unused-imports eslint-plugin-import eslint-plugin-tailwindcss
+```
+
+Then, add them to your .eslintrc.json file:
+
+```json title=".eslintrc.json"
+{
+  "extends": [
+    "next",
+    "plugin:react-hooks/recommended",
+    "plugin:unused-imports/recommended",
+    "plugin:import/recommended",
+    "plugin:tailwindcss/recommended"
+  ]
+}
+```
+
+You may also need to adjust some of the rules or settings according to your needs. For example, you can disable the `no-unused-vars` rule from ESLint core since it is already covered by the `unused-imports` plugin:
+
+```json
+{
+  "rules": {
+    "no-unused-vars": "off"
+  }
+}
+```
+
+## Summary
+
+Thank you for reading this post. I hope it helped you learn more about ESLint, its features, and how to use it in your Nextjs projects.
+
+If you want to see all the rules that you can configure with ESLint, you can visit this [link](https://eslint.org/docs/latest/rules/).

@@ -65,7 +65,7 @@ export default function TagPage({
   return (
     <Layout>
       <PageSEO
-        title={`${tag} - lavinoys`}
+        title={`${tag} - Nguyen Nang`}
         description={`Posts and Snippets about ${tag} (${postsLength})`}
       />
 
