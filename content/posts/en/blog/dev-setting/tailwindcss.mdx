@@ -49,6 +49,10 @@ npx create-next-app@latest my-project --typescript --eslint
 cd my-project
 ```
 
+In Next.js 13 and newer, when initializing a new project with the above command. 
+Next.js will ask if you want to use TailwindCSS and will automatically install the required packages and do the necessary settings if you agree. Below is the screenshot:
+![setup tailwindcss](/images/posts/tailwindcss/setup.png)
+
 2. Install Tailwind CSS and its peer dependencies via npm.
 
 ```bash
@@ -152,7 +156,7 @@ Now you can format your code with Prettier as usual. For example:
 </button>
 
 <!-- After -->
-<button class="inline-block px-4 py-2 border-none rounded bg-blue-500 text-white font-bold">
+<button class="inline-block rounded border-none bg-blue-500 px-4 py-2 font-bold text-white">
   Click me
 </button>
 ```
